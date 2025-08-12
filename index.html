@@ -495,6 +495,29 @@
             <div class="card">
                 <div class="card-title">⏱️ Mission Planner</div>
                 
+                <!-- Departure Section -->
+                <div style="background: #2a3540; border-radius: 12px; padding: 20px; margin-bottom: 20px; border: 1px solid #445566;">
+                    <h3 style="color: #FFD700; font-size: 16px; font-weight: 700; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                        🗓️ Departure Details
+                    </h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Departure Date</label>
+                            <input type="date" id="departure-date">
+                        </div>
+                        <div class="form-group">
+                            <label>Departure Time</label>
+                            <div class="input-wrapper">
+                                <input type="text" id="departure-time" placeholder="14:30 or 2:30 PM" pattern="^([01]?[0-9]|2[0-3]):[0-5][0-9]$|^(1[0-2]|0?[1-9]):[0-5][0-9]\s?(AM|PM)$">
+                                <select class="unit-select" id="time-format">
+                                    <option value="24">24hr</option>
+                                    <option value="12">12hr</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="form-grid">
                     <div class="form-group">
                         <label>Average Cruising Speed</label>
@@ -556,6 +579,17 @@
 
                 <div id="mission-results" class="results" style="display: none;">
                     <div class="results-title">Mission Results</div>
+                    
+                    <!-- Mission Timeline -->
+                    <div id="mission-timeline" style="background: rgba(255, 215, 0, 0.1); border: 1px solid #FFD700; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
+                        <h4 style="color: #FFD700; margin-bottom: 10px; text-align: center;">📅 Mission Timeline</h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 14px; color: #ccc;">
+                            <div><strong>Start:</strong> <span id="mission-start">--</span></div>
+                            <div><strong>End:</strong> <span id="mission-end">--</span></div>
+                            <div><strong>Date(s):</strong> <span id="mission-dates">--</span></div>
+                        </div>
+                    </div>
+
                     <div class="results-grid">
                         <div class="result-item">
                             <div class="result-label">Total Duration</div>
@@ -808,6 +842,11 @@
         // Mission Planner Functions
         function calculateMission() {
             try {
+                // Get departure date/time
+                const departureDate = document.getElementById('departure-date').value;
+                const departureTime = document.getElementById('departure-time').value;
+                const timeFormat = document.getElementById('time-format').value;
+
                 // Get inputs
                 const cruiseSpeed = parseFloat(document.getElementById('cruise-speed').value);
                 const towSpeed = parseFloat(document.getElementById('tow-speed').value);
@@ -847,6 +886,45 @@
                 const towingTime = towDistanceNM / towSpeedKnots;
                 const totalTime = cruisingTime + towingTime + setupTimeHours;
 
+                // Calculate mission timeline if departure date/time provided
+                let startDateTime = null;
+                let endDateTime = null;
+                let missionDates = '--';
+
+                if (departureDate && departureTime) {
+                    try {
+                        startDateTime = parseDateTime(departureDate, departureTime, timeFormat);
+                        if (startDateTime) {
+                            endDateTime = new Date(startDateTime.getTime() + (totalTime * 60 * 60 * 1000));
+                            
+                            // Format start and end times
+                            const startTimeStr = formatDateTime(startDateTime, timeFormat);
+                            const endTimeStr = formatDateTime(endDateTime, timeFormat);
+                            
+                            // Calculate mission dates
+                            const startDateStr = startDateTime.toDateString();
+                            const endDateStr = endDateTime.toDateString();
+                            
+                            if (startDateStr === endDateStr) {
+                                missionDates = startDateStr;
+                            } else {
+                                missionDates = `${startDateStr} - ${endDateStr}`;
+                            }
+                            
+                            // Update timeline display
+                            document.getElementById('mission-start').textContent = startTimeStr;
+                            document.getElementById('mission-end').textContent = endTimeStr;
+                            document.getElementById('mission-dates').textContent = missionDates;
+                            document.getElementById('mission-timeline').style.display = 'block';
+                        }
+                    } catch (timeError) {
+                        // If time parsing fails, continue without timeline
+                        document.getElementById('mission-timeline').style.display = 'none';
+                    }
+                } else {
+                    document.getElementById('mission-timeline').style.display = 'none';
+                }
+
                 // Display results
                 document.getElementById('total-duration').textContent = formatTime(totalTime);
                 document.getElementById('cruising-time').textContent = formatTime(cruisingTime);
@@ -859,6 +937,66 @@
             } catch (error) {
                 showMissionError('Error calculating mission: ' + error.message);
             }
+        }
+
+        // Parse date and time string into Date object
+        function parseDateTime(dateStr, timeStr, format) {
+            if (!dateStr || !timeStr) return null;
+
+            let hours, minutes;
+            
+            if (format === '12') {
+                // Parse 12-hour format (e.g., "2:30 PM")
+                const timeMatch = timeStr.match(/^(1[0-2]|0?[1-9]):([0-5][0-9])\s?(AM|PM)$/i);
+                if (!timeMatch) {
+                    // Try without spaces
+                    const timeMatch2 = timeStr.match(/^(1[0-2]|0?[1-9]):([0-5][0-9])(AM|PM)$/i);
+                    if (!timeMatch2) throw new Error('Invalid 12-hour time format');
+                    hours = parseInt(timeMatch2[1]);
+                    minutes = parseInt(timeMatch2[2]);
+                    const ampm = timeMatch2[3].toUpperCase();
+                    if (ampm === 'PM' && hours !== 12) hours += 12;
+                    if (ampm === 'AM' && hours === 12) hours = 0;
+                } else {
+                    hours = parseInt(timeMatch[1]);
+                    minutes = parseInt(timeMatch[2]);
+                    const ampm = timeMatch[3].toUpperCase();
+                    if (ampm === 'PM' && hours !== 12) hours += 12;
+                    if (ampm === 'AM' && hours === 12) hours = 0;
+                }
+            } else {
+                // Parse 24-hour format (e.g., "14:30")
+                const timeMatch = timeStr.match(/^([01]?[0-9]|2[0-3]):([0-5][0-9])$/);
+                if (!timeMatch) throw new Error('Invalid 24-hour time format');
+                hours = parseInt(timeMatch[1]);
+                minutes = parseInt(timeMatch[2]);
+            }
+
+            const date = new Date(dateStr + 'T00:00:00');
+            date.setHours(hours, minutes, 0, 0);
+            return date;
+        }
+
+        // Format Date object to string
+        function formatDateTime(dateTime, format) {
+            const date = dateTime.toLocaleDateString();
+            let timeStr;
+            
+            if (format === '12') {
+                timeStr = dateTime.toLocaleTimeString('en-US', { 
+                    hour: 'numeric', 
+                    minute: '2-digit',
+                    hour12: true 
+                });
+            } else {
+                timeStr = dateTime.toLocaleTimeString('en-US', { 
+                    hour12: false,
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            }
+            
+            return `${date} ${timeStr}`;
         }
 
         function formatTime(hours) {
