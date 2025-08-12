@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SeaBorne Navigation Suite</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #001122 0%, #003366 100%);
+            min-height: 100vh;
+            color: #ffffff;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #000;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            position: relative;
+            z-index: 1000;
+        }
+
+        .hamburger {
+            background: none;
+            border: none;
+            color: #000;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+            margin-right: 15px;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+
+        .hamburger:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            position: fixed;
+            left: -280px;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(15, 25, 35, 0.95);
+            border-right: 2px solid #334455;
+            transition: left 0.3s ease;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .sidebar-header {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #000;
+            padding: 20px;
+            border-bottom: 1px solid #334455;
+        }
+
+        .sidebar-header h2 {
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            padding: 20px 0;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 15px 25px;
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: rgba(0, 191, 255, 0.1);
+            color: #00BFFF;
+            border-left-color: #00BFFF;
+        }
+
+        .nav-item.active {
+            background: rgba(255, 215, 0, 0.1);
+            color: #FFD700;
+            border-left-color: #FFD700;
+        }
+
+        .nav-item .icon {
+            display: inline-block;
+            width: 20px;
+            margin-right: 12px;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 998;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Card Styling */
+        .card {
+            background: rgba(26, 26, 26, 0.95);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            border: 1px solid #334455;
+            box-shadow: 0 8px 32px rgba(0, 150, 255, 0.15);
+        }
+
+        .card-title {
+            color: #FFD700;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Form Styling */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            color: #ccc;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 8px;
+            align-items: stretch;
+        }
+
+        input, select {
+            background: #333;
+            border: 2px solid #555;
+            border-radius: 8px;
+            color: #fff;
+            padding: 12px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input {
+            flex: 1;
+            width: 50%;
+        }
+
+        select {
+            width: 100%;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #FFD700;
+            background: #404040;
+            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.1);
+        }
+
+        .unit-select {
+            flex: 1;
+            width: 50%;
+            min-width: auto;
+            flex-shrink: 0;
+        }
+
+        /* Coordinate specific styling */
+        .coordinates-input {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .coordinates-input input {
+            flex: 1;
+        }
+
+        .coordinates-input .separator {
+            color: #888;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            flex-shrink: 0;
+            padding: 0 4px;
+        }
+
+        .ddm-buttons {
+            display: flex;
+            gap: 4px;
+            margin-top: 10px;
+            justify-content: center;
+        }
+
+        .ddm-symbol-btn {
+            background: #FFD700;
+            color: #000000;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .ddm-symbol-btn:hover {
+            background: #FFDF00;
+            transform: translateY(-1px);
+        }
+
+        /* Button Styling */
+        .btn {
+            background: linear-gradient(135deg, #00BFFF 0%, #0080FF 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 191, 255, 0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #000;
+            font-weight: 700;
+        }
+
+        .btn-clear {
+            background: #666;
+            color: white;
+        }
+
+        .btn-clear:hover {
+            background: #888;
+        }
+
+        /* Results Styling */
+        .results {
+            background: #1a3344;
+            border: 2px solid #00BFFF;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .results-title {
+            color: #00BFFF;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .result-item {
+            background: rgba(0, 191, 255, 0.1);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .result-label {
+            color: #ccc;
+            font-size: 12px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+
+        .result-value {
+            color: #00BFFF;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .error {
+            background: #4a1a1a;
+            color: #ff6b6b;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-size: 13px;
+            border-left: 3px solid #ff4444;
+            display: none;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .results-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .coordinates-input {
+                grid-template-columns: 1fr;
+            }
+            
+            .coordinates-input .separator {
+                display: none;
+            }
+            
+            /* Stack coordinate sections on mobile */
+            #coordinates-page .card > div:first-of-type {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-content {
+                padding: 15px;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <button class="hamburger" onclick="toggleSidebar()">☰</button>
+        <h1>⚓ SeaBorne Navigation Suite</h1>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>Navigation Tools</h2>
+        </div>
+        <nav class="nav-menu">
+            <a href="#" class="nav-item active" onclick="showPage('coordinates')">
+                <span class="icon">📍</span>
+                Coordinate Converter
+            </a>
+            <a href="#" class="nav-item" onclick="showPage('mission')">
+                <span class="icon">⏱️</span>
+                Mission Planner
+            </a>
+            <a href="#" class="nav-item" onclick="showPage('about')">
+                <span class="icon">ℹ️</span>
+                About
+            </a>
+        </nav>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        
+        <!-- Coordinate Converter Page -->
+        <div id="coordinates-page" class="page active">
+            <div class="card">
+                <div class="card-title">📍 Coordinate Converter</div>
+                
+                <!-- Section Headers -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 15px;">
+                    <div style="color: #ccc; font-size: 16px; font-weight: 600;">Decimal Degrees</div>
+                    <div style="color: #ccc; font-size: 16px; font-weight: 600;">DDM Format</div>
+                </div>
+                
+                <!-- Latitude Row -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 15px;">
+                    <div>
+                        <label style="color: #ccc; font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block;">Latitude</label>
+                        <input type="number" id="lat-decimal" placeholder="26.77534" step="any" onkeyup="handleDecimalInput()" style="width: 100%; box-sizing: border-box;">
+                    </div>
+                    <div>
+                        <label style="color: #ccc; font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block;">Latitude</label>
+                        <input type="text" id="lat-ddm" placeholder="26°46.520'N" onkeyup="handleDDMInput()" onfocus="setLastFocusedDDM(this)" oninput="this.value = this.value.toUpperCase()" style="text-transform: uppercase; width: 100%; box-sizing: border-box;">
+                    </div>
+                </div>
+                
+                <!-- Longitude Row -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-bottom: 20px;">
+                    <div>
+                        <label style="color: #ccc; font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block;">Longitude</label>
+                        <input type="number" id="lng-decimal" placeholder="-80.0581" step="any" onkeyup="handleDecimalInput()" style="width: 100%; box-sizing: border-box;">
+                    </div>
+                    <div>
+                        <label style="color: #ccc; font-size: 14px; font-weight: 600; margin-bottom: 8px; display: block;">Longitude</label>
+                        <input type="text" id="lng-ddm" placeholder="80°03.486'W" onkeyup="handleDDMInput()" onfocus="setLastFocusedDDM(this)" oninput="this.value = this.value.toUpperCase()" style="text-transform: uppercase; width: 100%; box-sizing: border-box;">
+                    </div>
+                </div>
+
+                <!-- DDM Symbol Buttons -->
+                <div class="ddm-buttons" style="margin-bottom: 20px;">
+                    <button type="button" class="ddm-symbol-btn" onclick="insertSymbol('°')">°</button>
+                    <button type="button" class="ddm-symbol-btn" onclick="insertSymbol('N')">N</button>
+                    <button type="button" class="ddm-symbol-btn" onclick="insertSymbol('S')">S</button>
+                    <button type="button" class="ddm-symbol-btn" onclick="insertSymbol('E')">E</button>
+                    <button type="button" class="ddm-symbol-btn" onclick="insertSymbol('W')">W</button>
+                </div>
+
+                <!-- Buttons -->
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button class="btn btn-primary" onclick="convertAll()">🔄 Convert</button>
+                    <button class="btn btn-clear" onclick="clearCoordinates()">Clear</button>
+                    <button class="btn" onclick="openInGoogleMaps()">📍 Google Maps</button>
+                </div>
+
+                <div id="coord-error" class="error"></div>
+            </div>
+        </div>
+
+        <!-- Mission Planner Page -->
+        <div id="mission-page" class="page">
+            <div class="card">
+                <div class="card-title">⏱️ Mission Planner</div>
+                
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Average Cruising Speed</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="cruise-speed" placeholder="23" step="0.1">
+                            <select class="unit-select" id="cruise-speed-unit">
+                                <option value="knots">Knots</option>
+                                <option value="mph">MPH</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Average Towing Speed</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="tow-speed" placeholder="7" step="0.1">
+                            <select class="unit-select" id="tow-speed-unit">
+                                <option value="knots">Knots</option>
+                                <option value="mph">MPH</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Distance Cruising</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="cruise-distance" placeholder="20" step="0.1">
+                            <select class="unit-select" id="cruise-distance-unit">
+                                <option value="nm">Nautical Miles</option>
+                                <option value="sm">Statute Miles</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Distance Towing</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="tow-distance" placeholder="15" step="0.1">
+                            <select class="unit-select" id="tow-distance-unit">
+                                <option value="nm">Nautical Miles</option>
+                                <option value="sm">Statute Miles</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Setup Time</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="setup-time" placeholder="15" step="1">
+                            <select class="unit-select" id="setup-time-unit">
+                                <option value="minutes">Minutes</option>
+                                <option value="hours">Hours</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-primary" onclick="calculateMission()">🧮 Calculate Mission</button>
+
+                <div id="mission-results" class="results" style="display: none;">
+                    <div class="results-title">Mission Results</div>
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <div class="result-label">Total Duration</div>
+                            <div class="result-value" id="total-duration">--</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Cruising Time</div>
+                            <div class="result-value" id="cruising-time">--</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Towing Time</div>
+                            <div class="result-value" id="towing-time">--</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Setup Time</div>
+                            <div class="result-value" id="setup-time-result">--</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="mission-error" class="error"></div>
+            </div>
+        </div>
+
+        <!-- About Page -->
+        <div id="about-page" class="page">
+            <div class="card">
+                <div class="card-title">ℹ️ About SeaBorne Navigation Suite</div>
+                <p style="color: #ccc; line-height: 1.6; margin-bottom: 15px;">
+                    A professional toolkit for marine towing and salvage operations.
+                </p>
+                <h3 style="color: #FFD700; margin: 20px 0 10px 0;">Features:</h3>
+                <ul style="color: #ccc; line-height: 1.6; margin-left: 20px;">
+                    <li>Coordinate format conversion (Decimal ↔ DDM)</li>
+                    <li>Simple mission time calculations</li>
+                    <li>Google Maps integration</li>
+                    <li>Mobile-friendly interface</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Navigation
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+        }
+
+        function showPage(pageName) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Remove active from all nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageName + '-page').classList.add('active');
+            
+            // Add active to clicked nav item
+            event.target.classList.add('active');
+            
+            // Close sidebar on mobile
+            closeSidebar();
+        }
+
+        // Coordinate Converter Functions
+        let isUpdating = false;
+        let lastFocusedDDMField = null;
+
+        function setLastFocusedDDM(input) {
+            lastFocusedDDMField = input;
+        }
+
+        function insertSymbol(symbol) {
+            let targetInput = lastFocusedDDMField;
+            
+            if (!targetInput) {
+                targetInput = document.getElementById('lat-ddm');
+            }
+            
+            const cursorPos = targetInput.selectionStart || targetInput.value.length;
+            const value = targetInput.value;
+            const newValue = value.slice(0, cursorPos) + symbol + value.slice(cursorPos);
+            
+            targetInput.value = newValue;
+            targetInput.focus();
+            targetInput.setSelectionRange(cursorPos + 1, cursorPos + 1);
+            
+            handleDDMInput();
+        }
+
+        function handleDecimalInput() {
+            if (isUpdating) return;
+            
+            const lat = parseFloat(document.getElementById('lat-decimal').value);
+            const lng = parseFloat(document.getElementById('lng-decimal').value);
+            
+            if (!isNaN(lat) && !isNaN(lng) && lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180) {
+                updateOtherFormats('decimal', lat, lng);
+                clearCoordError();
+            }
+        }
+
+        function handleDDMInput() {
+            if (isUpdating) return;
+            
+            const latDDM = document.getElementById('lat-ddm').value.trim();
+            const lngDDM = document.getElementById('lng-ddm').value.trim();
+            
+            if (latDDM && lngDDM) {
+                const coords = parseDDM(latDDM, lngDDM);
+                if (coords) {
+                    updateOtherFormats('ddm', coords.lat, coords.lng);
+                    clearCoordError();
+                }
+            }
+        }
+
+        function parseDDM(latStr, lngStr) {
+            try {
+                const latMatch = latStr.match(/(\d+)°(\d+\.?\d*)'?([NS])/i);
+                const lngMatch = lngStr.match(/(\d+)°(\d+\.?\d*)'?([EW])/i);
+
+                if (latMatch && lngMatch) {
+                    let lat = parseInt(latMatch[1]) + parseFloat(latMatch[2]) / 60;
+                    let lng = parseInt(lngMatch[1]) + parseFloat(lngMatch[2]) / 60;
+
+                    if (latMatch[3].toUpperCase() === 'S') lat = -lat;
+                    if (lngMatch[3].toUpperCase() === 'W') lng = -lng;
+
+                    return { lat, lng };
+                }
+            } catch (e) {
+                return null;
+            }
+            return null;
+        }
+
+        function updateOtherFormats(sourceType, lat, lng) {
+            isUpdating = true;
+
+            if (sourceType !== 'decimal') {
+                document.getElementById('lat-decimal').value = lat.toFixed(6);
+                document.getElementById('lng-decimal').value = lng.toFixed(6);
+            }
+
+            if (sourceType !== 'ddm') {
+                const ddm = convertToDDM(lat, lng);
+                const ddmParts = ddm.split(', ');
+                document.getElementById('lat-ddm').value = ddmParts[0];
+                document.getElementById('lng-ddm').value = ddmParts[1];
+            }
+
+            isUpdating = false;
+        }
+
+        function convertToDDM(lat, lng) {
+            const latAbs = Math.abs(lat);
+            const latDeg = Math.floor(latAbs);
+            const latMin = (latAbs - latDeg) * 60;
+            const latDir = lat >= 0 ? 'N' : 'S';
+
+            const lngAbs = Math.abs(lng);
+            const lngDeg = Math.floor(lngAbs);
+            const lngMin = (lngAbs - lngDeg) * 60;
+            const lngDir = lng >= 0 ? 'E' : 'W';
+
+            return `${latDeg}°${latMin.toFixed(3)}'${latDir}, ${lngDeg}°${lngMin.toFixed(3)}'${lngDir}`;
+        }
+
+        function convertAll() {
+            const latDecimal = parseFloat(document.getElementById('lat-decimal').value);
+            const lngDecimal = parseFloat(document.getElementById('lng-decimal').value);
+            const latDDM = document.getElementById('lat-ddm').value.trim();
+            const lngDDM = document.getElementById('lng-ddm').value.trim();
+
+            try {
+                let lat, lng;
+
+                if (!isNaN(latDecimal) && !isNaN(lngDecimal)) {
+                    lat = latDecimal; lng = lngDecimal;
+                } else if (latDDM && lngDDM) {
+                    const coords = parseDDM(latDDM, lngDDM);
+                    if (coords) { lat = coords.lat; lng = coords.lng; }
+                }
+
+                if (lat !== undefined && lng !== undefined) {
+                    updateOtherFormats('manual', lat, lng);
+                    clearCoordError();
+                } else {
+                    showCoordError('Please enter valid coordinates in at least one format.');
+                }
+            } catch (e) {
+                showCoordError('Error converting coordinates: ' + e.message);
+            }
+        }
+
+        function openInGoogleMaps() {
+            const lat = parseFloat(document.getElementById('lat-decimal').value);
+            const lng = parseFloat(document.getElementById('lng-decimal').value);
+            
+            if (isNaN(lat) || isNaN(lng)) {
+                showCoordError('Please enter valid coordinates before opening Google Maps.');
+                return;
+            }
+            
+            if (lat < -90 || lat > 90 || lng < -180 || lng > 180) {
+                showCoordError('Coordinates are out of valid range.');
+                return;
+            }
+            
+            const mapsUrl = `https://www.google.com/maps?q=${lat},${lng}&z=15`;
+            window.open(mapsUrl, '_blank');
+            clearCoordError();
+        }
+
+        function clearCoordinates() {
+            document.getElementById('lat-decimal').value = '';
+            document.getElementById('lng-decimal').value = '';
+            document.getElementById('lat-ddm').value = '';
+            document.getElementById('lng-ddm').value = '';
+            clearCoordError();
+        }
+
+        function showCoordError(message) {
+            const errorDiv = document.getElementById('coord-error');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        function clearCoordError() {
+            document.getElementById('coord-error').style.display = 'none';
+        }
+
+        // Mission Planner Functions
+        function calculateMission() {
+            try {
+                // Get inputs
+                const cruiseSpeed = parseFloat(document.getElementById('cruise-speed').value);
+                const towSpeed = parseFloat(document.getElementById('tow-speed').value);
+                const cruiseDistance = parseFloat(document.getElementById('cruise-distance').value);
+                const towDistance = parseFloat(document.getElementById('tow-distance').value);
+                const setupTime = parseFloat(document.getElementById('setup-time').value);
+
+                // Validate inputs
+                if (isNaN(cruiseSpeed) || isNaN(towSpeed) || isNaN(cruiseDistance) || isNaN(towDistance) || isNaN(setupTime)) {
+                    showMissionError('Please enter all values.');
+                    return;
+                }
+
+                if (cruiseSpeed <= 0 || towSpeed <= 0 || cruiseDistance < 0 || towDistance < 0 || setupTime < 0) {
+                    showMissionError('Please enter positive values.');
+                    return;
+                }
+
+                // Convert units to consistent format (knots)
+                const cruiseSpeedKnots = document.getElementById('cruise-speed-unit').value === 'mph' ? 
+                    cruiseSpeed * 0.868976 : cruiseSpeed;
+                const towSpeedKnots = document.getElementById('tow-speed-unit').value === 'mph' ? 
+                    towSpeed * 0.868976 : towSpeed;
+
+                // Convert distances to nautical miles
+                const cruiseDistanceNM = document.getElementById('cruise-distance-unit').value === 'sm' ? 
+                    cruiseDistance * 0.868976 : cruiseDistance;
+                const towDistanceNM = document.getElementById('tow-distance-unit').value === 'sm' ? 
+                    towDistance * 0.868976 : towDistance;
+
+                // Convert setup time to hours
+                const setupTimeHours = document.getElementById('setup-time-unit').value === 'minutes' ? 
+                    setupTime / 60 : setupTime;
+
+                // Calculate times (hours)
+                const cruisingTime = cruiseDistanceNM / cruiseSpeedKnots;
+                const towingTime = towDistanceNM / towSpeedKnots;
+                const totalTime = cruisingTime + towingTime + setupTimeHours;
+
+                // Display results
+                document.getElementById('total-duration').textContent = formatTime(totalTime);
+                document.getElementById('cruising-time').textContent = formatTime(cruisingTime);
+                document.getElementById('towing-time').textContent = formatTime(towingTime);
+                document.getElementById('setup-time-result').textContent = formatTime(setupTimeHours);
+
+                document.getElementById('mission-results').style.display = 'block';
+                clearMissionError();
+
+            } catch (error) {
+                showMissionError('Error calculating mission: ' + error.message);
+            }
+        }
+
+        function formatTime(hours) {
+            const h = Math.floor(hours);
+            const m = Math.round((hours % 1) * 60);
+            return `${h}h ${m}m`;
+        }
+
+        function showMissionError(message) {
+            const errorDiv = document.getElementById('mission-error');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        function clearMissionError() {
+            document.getElementById('mission-error').style.display = 'none';
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const activePage = document.querySelector('.page.active');
+                if (activePage.id === 'coordinates-page') {
+                    convertAll();
+                } else if (activePage.id === 'mission-page') {
+                    calculateMission();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
