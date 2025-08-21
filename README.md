@@ -1,2 +1,2 @@
 # SeabornePub
-A suite of mission planning tools for nautical voyages
+Public demo of a mission planner for professional mariners.
