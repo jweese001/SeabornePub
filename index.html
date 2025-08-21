@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -170,6 +169,13 @@
             gap: 10px;
         }
 
+        .card-subtitle {
+            color: #ccc;
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
         /* Form Styling */
         .form-grid {
             display: grid;
@@ -309,6 +315,11 @@
             background: #888;
         }
 
+        .btn-secondary {
+            background: linear-gradient(135deg, #00BFFF 0%, #0080FF 100%);
+            color: white;
+        }
+
         /* Results Styling */
         .results {
             background: #1a3344;
@@ -352,6 +363,580 @@
             font-weight: 700;
         }
 
+        /* Enhanced Results Display */
+        .mission-timeline {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid #FFD700;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .timeline-title {
+            color: #FFD700;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .timeline-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .timeline-label {
+            color: #ccc;
+            font-weight: 600;
+        }
+
+        .timeline-value {
+            color: #FFD700;
+            font-weight: 700;
+        }
+
+        /* Fleet Selection Cards */
+        .fleet-selection {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .vessel-option {
+            background: rgba(15, 25, 35, 0.8);
+            border: 2px solid #555;
+            border-radius: 12px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .vessel-option:hover {
+            border-color: #00BFFF;
+            transform: translateY(-2px);
+        }
+
+        .vessel-option.selected {
+            border-color: #FFD700;
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .vessel-name {
+            color: #FFD700;
+            font-weight: 700;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .vessel-specs {
+            font-size: 12px;
+            color: #ccc;
+            line-height: 1.4;
+        }
+
+        /* Collapsible Fleet Selection */
+        .fleet-selector {
+            background: #2a3540;
+            border-radius: 12px;
+            border: 1px solid #445566;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .fleet-selector-header {
+            padding: 15px 20px;
+            background: rgba(255, 215, 0, 0.1);
+            border-bottom: 1px solid #445566;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .fleet-selector-header:hover {
+            background: rgba(255, 215, 0, 0.15);
+        }
+
+        .selected-vessel-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .selected-vessel-name {
+            color: #FFD700;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .selected-vessel-specs {
+            color: #ccc;
+            font-size: 12px;
+        }
+
+        .fleet-toggle-icon {
+            color: #FFD700;
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        .fleet-selector.expanded .fleet-toggle-icon {
+            transform: rotate(180deg);
+        }
+
+        .fleet-options {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .fleet-selector.expanded .fleet-options {
+            max-height: 500px;
+        }
+
+        .fleet-options-inner {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .fleet-option {
+            background: rgba(15, 25, 35, 0.8);
+            border: 2px solid #555;
+            border-radius: 8px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .fleet-option:hover {
+            border-color: #00BFFF;
+            transform: translateY(-1px);
+        }
+
+        .fleet-option.selected {
+            border-color: #FFD700;
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .fleet-option-name {
+            color: #FFD700;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .fleet-option-specs {
+            font-size: 11px;
+            color: #ccc;
+            line-height: 1.3;
+        }
+
+        .fleet-actions {
+            padding: 15px 20px;
+            border-top: 1px solid #445566;
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .btn-add-vessel {
+            background: linear-gradient(135deg, #00FF7F 0%, #00CC66 100%);
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-add-vessel:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 255, 127, 0.3);
+        }
+
+        .btn-remove-vessel {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF4444 100%);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-remove-vessel:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+        }
+
+        .btn-remove-vessel:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Financial Items Styling */
+        .financial-item {
+            background: rgba(15, 25, 35, 0.8);
+            border: 2px solid #555;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .financial-item.mission-active {
+            border-color: #00FF7F;
+            background: rgba(0, 255, 127, 0.05);
+        }
+
+        .financial-item.mission-inactive {
+            border-color: #666;
+            opacity: 0.7;
+        }
+
+        .financial-item.expanded .financial-item-details {
+            max-height: none;
+        }
+
+        .financial-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #445566;
+            transition: all 0.3s ease;
+        }
+
+        .financial-item-header:hover {
+            background: rgba(255, 215, 0, 0.05);
+        }
+
+        .financial-item-title {
+            color: #FFD700;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .financial-item-name {
+            color: #ccc;
+            font-size: 14px;
+            margin-top: 2px;
+        }
+
+        .financial-item-controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .financial-toggle {
+            background: none;
+            border: 2px solid #666;
+            border-radius: 6px;
+            color: #ccc;
+            padding: 4px 8px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .financial-toggle.active {
+            border-color: #00FF7F;
+            color: #00FF7F;
+            background: rgba(0, 255, 127, 0.1);
+        }
+
+        .financial-item-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 15px;
+        }
+
+        .financial-item-details-inner {
+            padding: 20px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .financial-form-group {
+            display: flex;
+            flex-direction: column;
+            min-width: 0; /* Prevent flex items from overflowing */
+            box-sizing: border-box;
+        }
+
+        .financial-form-group label {
+            color: #ccc;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            flex-shrink: 0;
+        }
+
+        /* Optimized input field layouts */
+        .financial-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: stretch;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .financial-input-group .main-input {
+            flex: 2;
+            min-width: 100px;
+            max-width: none;
+        }
+
+        .financial-input-group .unit-selector {
+            flex: 0 0 auto;
+            min-width: fit-content;
+            width: auto;
+        }
+
+        .financial-input-group .currency-selector {
+            flex: 0 0 75px;
+            min-width: 75px;
+        }
+
+        .financial-input-group .period-selector {
+            flex: 0 0 90px;
+            min-width: 90px;
+        }
+
+        .financial-input-group .weight-unit-selector {
+            flex: 0 0 100px;
+            min-width: 100px;
+        }
+
+        .financial-input {
+            background: #333;
+            border: 2px solid #555;
+            border-radius: 8px;
+            color: #fff;
+            padding: 12px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .financial-input::placeholder {
+            color: #888;
+            font-style: italic;
+            opacity: 1;
+        }
+
+        .financial-input:focus {
+            outline: none;
+            border-color: #FFD700;
+            background: #404040;
+            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.1);
+        }
+
+        .financial-select {
+            background: #333;
+            border: 2px solid #555;
+            border-radius: 8px;
+            color: #fff;
+            padding: 12px 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+
+        .financial-select:focus {
+            outline: none;
+            border-color: #FFD700;
+            background: #404040;
+            box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.1);
+        }
+
+        /* Responsive breakpoints for financial forms */
+        @media (max-width: 900px) {
+            .financial-item-details-inner {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .financial-input-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .financial-input-group .main-input,
+            .financial-input-group .currency-selector,
+            .financial-input-group .period-selector,
+            .financial-input-group .weight-unit-selector {
+                flex: none;
+                width: 100%;
+                min-width: unset;
+                max-width: none;
+            }
+
+            .financial-input-group .currency-selector,
+            .financial-input-group .period-selector,
+            .financial-input-group .weight-unit-selector {
+                max-width: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .financial-item-details-inner {
+                padding: 15px 0;
+                gap: 20px;
+            }
+            
+            .financial-item-header {
+                padding: 15px 12px;
+            }
+            
+            .financial-item-actions {
+                padding: 15px 12px 12px 12px;
+                gap: 10px;
+            }
+
+            .financial-item-details {
+                padding: 0 12px;
+            }
+        }
+
+        .financial-item-actions {
+            padding: 20px 15px 15px 15px;
+            border-top: 1px solid #445566;
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .financial-detail {
+            color: #ccc;
+        }
+
+        .financial-detail-label {
+            font-weight: 600;
+            color: #888;
+        }
+
+        .financial-detail-value {
+            color: #fff;
+        }
+
+        .financial-item-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+
+        .btn-edit-financial,
+        .btn-save-financial,
+        .btn-remove-financial {
+            background: #666;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 16px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .btn-edit-financial:hover {
+            background: #00BFFF;
+        }
+
+        .btn-save-financial {
+            background: linear-gradient(135deg, #00FF7F 0%, #00CC66 100%);
+            color: #000;
+            font-weight: 600;
+        }
+
+        .btn-save-financial:hover {
+            background: linear-gradient(135deg, #00CC66 0%, #009955 100%);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 255, 127, 0.3);
+        }
+
+        .btn-remove-financial:hover {
+            background: #FF6B6B;
+        }
+
+        /* Filter button styling */
+        .btn-secondary.active {
+            background: linear-gradient(135deg, #00BFFF 0%, #0080FF 100%);
+            color: white;
+        }
+
+        /* Priority Indicators */
+        .priority-routine { border-left: 4px solid #00BFFF; }
+        .priority-urgent { border-left: 4px solid #FFA500; }
+        .priority-emergency { border-left: 4px solid #FF4444; animation: emergencyPulse 2s infinite; }
+
+        @keyframes emergencyPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(255, 68, 68, 0); }
+        }
+
+        /* Cost Breakdown */
+        .cost-breakdown {
+            background: rgba(0, 255, 127, 0.05);
+            border: 1px solid #00FF7F;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .cost-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .cost-label {
+            color: #ccc;
+        }
+
+        .cost-value {
+            color: #00FF7F;
+            font-weight: 600;
+        }
+
+        .total-cost {
+            border-top: 1px solid #00FF7F;
+            padding-top: 8px;
+            margin-top: 8px;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
         .error {
             background: #4a1a1a;
             color: #ff6b6b;
@@ -381,6 +966,10 @@
                 display: none;
             }
             
+            .fleet-selection {
+                grid-template-columns: 1fr;
+            }
+            
             /* Stack coordinate sections on mobile */
             #coordinates-page .card > div:first-of-type {
                 grid-template-columns: 1fr !important;
@@ -399,6 +988,10 @@
             .results-grid {
                 grid-template-columns: 1fr;
             }
+
+            .timeline-details {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -415,13 +1008,17 @@
             <h2>Navigation Tools</h2>
         </div>
         <nav class="nav-menu">
-            <a href="#" class="nav-item active" onclick="showPage('coordinates')">
-                <span class="icon">📍</span>
-                Coordinate Converter
-            </a>
-            <a href="#" class="nav-item" onclick="showPage('mission')">
+            <a href="#" class="nav-item active" onclick="showPage('mission')">
                 <span class="icon">⏱️</span>
                 Mission Planner
+            </a>
+            <a href="#" class="nav-item" onclick="showPage('financials')">
+                <span class="icon">💰</span>
+                Financials
+            </a>
+            <a href="#" class="nav-item" onclick="showPage('coordinates')">
+                <span class="icon">📍</span>
+                Coordinate Converter
             </a>
             <a href="#" class="nav-item" onclick="showPage('about')">
                 <span class="icon">ℹ️</span>
@@ -437,7 +1034,7 @@
     <div class="main-content">
         
         <!-- Coordinate Converter Page -->
-        <div id="coordinates-page" class="page active">
+        <div id="coordinates-page" class="page">
             <div class="card">
                 <div class="card-title">📍 Coordinate Converter</div>
                 
@@ -492,10 +1089,61 @@
         </div>
 
         <!-- Mission Planner Page -->
-        <div id="mission-page" class="page">
+        <div id="mission-page" class="page active">
             <div class="card">
                 <div class="card-title">⏱️ Mission Planner</div>
+                <div class="card-subtitle">
+                    Advanced mission planning with fleet selection, real-time cost estimation, weather integration, and comprehensive calculations
+                </div>
                 
+                <!-- Mission Configuration -->
+                <div style="background: #2a3540; border-radius: 12px; padding: 20px; margin-bottom: 20px; border: 1px solid #445566;">
+                    <h3 style="color: #FFD700; font-size: 16px; font-weight: 700; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                        🎯 Mission Configuration
+                    </h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Mission Type</label>
+                            <select id="mission-type">
+                                <option>Commercial Towing</option>
+                                <option>Emergency Salvage</option>
+                                <option>Equipment Transport</option>
+                                <option>Research Support</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Priority Level</label>
+                            <select id="mission-priority" onchange="updatePriorityIndicator()">
+                                <option value="routine">Routine Operations</option>
+                                <option value="urgent">Urgent Response</option>
+                                <option value="emergency">Emergency Dispatch</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fleet Selection -->
+                <div class="fleet-selector" id="fleet-section">
+                    <div class="fleet-selector-header" onclick="toggleFleetSelector()">
+                        <div class="selected-vessel-info">
+                            <div class="selected-vessel-name" id="selected-vessel-display">Vessel: None</div>
+                            <div class="selected-vessel-specs" id="selected-vessel-specs">
+                                No vessel selected
+                            </div>
+                        </div>
+                        <div class="fleet-toggle-icon">▼</div>
+                    </div>
+                    <div class="fleet-options" id="fleet-options">
+                        <div class="fleet-options-inner" id="fleet-options-inner">
+                            <!-- Fleet options will be dynamically generated -->
+                        </div>
+                        <div class="fleet-actions">
+                            <button class="btn-add-vessel" onclick="showAddVesselMessage()">+ Add Vessel</button>
+                            <button class="btn-remove-vessel" onclick="showRemoveVesselMessage()" id="remove-vessel-btn">Remove</button>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Departure Section -->
                 <div style="background: #2a3540; border-radius: 12px; padding: 20px; margin-bottom: 20px; border: 1px solid #445566;">
                     <h3 style="color: #FFD700; font-size: 16px; font-weight: 700; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
@@ -516,14 +1164,24 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label>Weather Impact Factor</label>
+                            <select id="weather-impact">
+                                <option value="0">No weather impact</option>
+                                <option value="10">Light conditions (+10% time)</option>
+                                <option value="25">Moderate conditions (+25% time)</option>
+                                <option value="50">Heavy conditions (+50% time)</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Performance Parameters -->
                 <div class="form-grid">
                     <div class="form-group">
                         <label>Average Cruising Speed</label>
                         <div class="input-wrapper">
-                            <input type="number" id="cruise-speed" placeholder="23" step="0.1">
+                            <input type="number" id="cruise-speed" placeholder="25" step="0.1">
                             <select class="unit-select" id="cruise-speed-unit">
                                 <option value="knots">Knots</option>
                                 <option value="mph">MPH</option>
@@ -534,7 +1192,7 @@
                     <div class="form-group">
                         <label>Average Towing Speed</label>
                         <div class="input-wrapper">
-                            <input type="number" id="tow-speed" placeholder="7" step="0.1">
+                            <input type="number" id="tow-speed" placeholder="8" step="0.1">
                             <select class="unit-select" id="tow-speed-unit">
                                 <option value="knots">Knots</option>
                                 <option value="mph">MPH</option>
@@ -574,23 +1232,53 @@
                             </select>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label>Crew Size</label>
+                        <div class="input-wrapper">
+                            <input type="number" id="crew-size" placeholder="1" step="1" min="1">
+                            <select class="unit-select" id="crew-size-unit">
+                                <option value="people">People</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
-                <button class="btn btn-primary" onclick="calculateMission()">🧮 Calculate Mission</button>
+                <!-- Action Buttons -->
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button class="btn btn-primary" onclick="calculateMission()">🧮 Calculate Mission</button>
+                    <button class="btn btn-secondary" onclick="checkWeatherWindow()">🌊 Check Weather</button>
+                    <button class="btn btn-clear" onclick="clearMissionForm()">Clear</button>
+                </div>
 
+                <!-- Mission Results Display -->
                 <div id="mission-results" class="results" style="display: none;">
                     <div class="results-title">Mission Results</div>
                     
                     <!-- Mission Timeline -->
-                    <div id="mission-timeline" style="background: rgba(255, 215, 0, 0.1); border: 1px solid #FFD700; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
-                        <h4 style="color: #FFD700; margin-bottom: 10px; text-align: center;">📅 Mission Timeline</h4>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 14px; color: #ccc;">
-                            <div><strong>Start:</strong> <span id="mission-start">--</span></div>
-                            <div><strong>End:</strong> <span id="mission-end">--</span></div>
-                            <div><strong>Date(s):</strong> <span id="mission-dates">--</span></div>
+                    <div class="mission-timeline" id="mission-timeline">
+                        <div class="timeline-title">📅 Mission Timeline & Weather Window</div>
+                        <div class="timeline-details">
+                            <div class="timeline-item">
+                                <span class="timeline-label">Departure:</span>
+                                <span class="timeline-value" id="mission-start">--</span>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="timeline-label">Arrival:</span>
+                                <span class="timeline-value" id="mission-end">--</span>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="timeline-label">Duration:</span>
+                                <span class="timeline-value" id="mission-duration">--</span>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="timeline-label">Weather Window:</span>
+                                <span class="timeline-value" id="weather-window">Favorable</span>
+                            </div>
                         </div>
                     </div>
 
+                    <!-- Performance Results -->
                     <div class="results-grid">
                         <div class="result-item">
                             <div class="result-label">Total Duration</div>
@@ -608,10 +1296,100 @@
                             <div class="result-label">Setup Time</div>
                             <div class="result-value" id="setup-time-result">--</div>
                         </div>
+                        <div class="result-item">
+                            <div class="result-label">Fuel Required</div>
+                            <div class="result-value" id="fuel-required">--</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label">Selected Vessel</div>
+                            <div class="result-value" id="selected-vessel">--</div>
+                        </div>
+                    </div>
+
+                    <!-- Cost Breakdown -->
+                    <div class="cost-breakdown">
+                        <h4 style="color: #00FF7F; margin-bottom: 10px; text-align: center;">💰 Cost Breakdown</h4>
+                        <div class="cost-item">
+                            <span class="cost-label">Fuel Cost:</span>
+                            <span class="cost-value" id="fuel-cost">--</span>
+                        </div>
+                        <div id="crew-costs-container">
+                            <!-- Individual crew costs will be populated here -->
+                        </div>
+                        <div class="cost-item">
+                            <span class="cost-label">Total Labor Cost:</span>
+                            <span class="cost-value" id="total-labor-cost">--</span>
+                        </div>
+                        <div class="cost-item">
+                            <span class="cost-label">Equipment Rental:</span>
+                            <span class="cost-value" id="equipment-cost">--</span>
+                        </div>
+                        <div class="cost-item total-cost">
+                            <span class="cost-label">Total Estimated Cost:</span>
+                            <span class="cost-value" id="total-cost">--</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Fee For Service -->
+                    <div class="cost-breakdown">
+                        <h4 style="color: #00FF7F; margin-bottom: 10px; text-align: center;">💼 Fee For Service</h4>
+                        <div id="fee-for-service-container">
+                            <!-- Individual customer fees will be populated here -->
+                        </div>
+                        <div class="cost-item total-cost">
+                            <span class="cost-label">Fee Total:</span>
+                            <span class="cost-value" id="fee-total">--</span>
+                        </div>
                     </div>
                 </div>
 
                 <div id="mission-error" class="error"></div>
+            </div>
+        </div>
+
+        <!-- Financials Page -->
+        <div id="financials-page" class="page">
+            <div class="card">
+                <div class="card-title">💰 Financials</div>
+                <div class="card-subtitle">
+                    Manage financial items and resources for mission cost calculations
+                </div>
+                
+                <!-- Asset Type Selector -->
+                <div class="fleet-selector" id="asset-selector" style="margin-bottom: 20px;">
+                    <div class="fleet-selector-header" onclick="toggleAssetSelector()">
+                        <div class="selected-vessel-info">
+                            <div class="selected-vessel-name">Select Asset Type to Add</div>
+                            <div class="selected-vessel-specs">Choose from: Crew, Equipment, Supplies, Fuel, Vessel</div>
+                        </div>
+                        <div class="fleet-toggle-icon">▼</div>
+                    </div>
+                    <div class="fleet-options" id="asset-options">
+                        <div class="fleet-options-inner" id="asset-options-inner">
+                            <!-- Asset options will be dynamically generated -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Filter Controls -->
+                <div style="background: #2a3540; border-radius: 12px; padding: 20px; margin-bottom: 20px; border: 1px solid #445566;">
+                    <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+                        <label style="color: #ccc; font-size: 14px; font-weight: 600; margin-right: 5px; flex-shrink: 0;">View:</label>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button class="btn btn-secondary active" id="show-all-btn" onclick="filterFinancials('all')" style="padding: 10px 16px; font-size: 12px; white-space: nowrap;">All Items</button>
+                            <button class="btn btn-secondary" id="show-active-btn" onclick="filterFinancials('active')" style="padding: 10px 16px; font-size: 12px; white-space: nowrap;">Mission Items Only</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Financial Items List -->
+                <div id="financials-list" style="display: grid; gap: 15px;">
+                    <div style="text-align: center; color: #888; padding: 40px; font-style: italic;">
+                        No financial items added yet. Click "Add Financial Item" to get started.
+                    </div>
+                </div>
+
+                <div id="financials-error" class="error"></div>
             </div>
         </div>
 
@@ -620,21 +1398,80 @@
             <div class="card">
                 <div class="card-title">ℹ️ About SeaBorne Navigation Suite</div>
                 <p style="color: #ccc; line-height: 1.6; margin-bottom: 15px;">
-                    A professional toolkit for marine towing and salvage operations.
+                    A professional toolkit for marine towing and salvage operations with enhanced mission planning capabilities.
                 </p>
                 <h3 style="color: #FFD700; margin: 20px 0 10px 0;">Features:</h3>
                 <ul style="color: #ccc; line-height: 1.6; margin-left: 20px;">
                     <li>Coordinate format conversion (Decimal ↔ DDM)</li>
-                    <li>Simple mission time calculations</li>
+                    <li>Advanced mission planning with fleet selection</li>
+                    <li>Real-time cost estimation and breakdown</li>
+                    <li>Weather impact calculations</li>
+                    <li>Multi-vessel specifications and performance modeling</li>
+                    <li>Priority-based mission classification</li>
+                    <li>Comprehensive fuel consumption and labor cost calculations</li>
                     <li>Google Maps integration</li>
                     <li>Mobile-friendly interface</li>
                 </ul>
+                <h3 style="color: #FFD700; margin: 20px 0 10px 0;">Fleet Specifications:</h3>
+                <div style="color: #ccc; line-height: 1.6; margin-left: 20px;">
+                    <p><strong>Sea Rescue I:</strong> 45ft Tug Boat - 25kt cruise, 8kt tow, 40 gal/hr</p>
+                    <p><strong>Ocean Guardian:</strong> 55ft Multi-Purpose - 28kt cruise, 10kt tow, 50 gal/hr</p>
+                    <p><strong>Coastal Defender:</strong> 38ft Response - 32kt cruise, 12kt tow, 35 gal/hr</p>
+                    <p><strong>Harbor Master:</strong> 42ft Utility - 22kt cruise, 7kt tow, 30 gal/hr</p>
+                </div>
+                
+                <h3 style="color: #FFD700; margin: 30px 0 15px 0;">Data Management:</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;">
+                    <button class="btn btn-primary" onclick="saveApplicationState()" title="Save current state">
+                        💾 Save Data
+                    </button>
+                    <button class="btn" onclick="exportData()" title="Export to file">
+                        📤 Export to File
+                    </button>
+                    <button class="btn" onclick="importData()" title="Import from file">
+                        📥 Import from File
+                    </button>
+                    <button class="btn btn-clear" onclick="clearAllData()" title="Clear all data">
+                        🗑️ Clear All Data
+                    </button>
+                </div>
+                <div style="color: #888; font-size: 12px; margin-top: 10px; line-height: 1.4;">
+                    <p><strong>Auto-save:</strong> Data is automatically saved when you make changes.</p>
+                    <p><strong>Export/Import:</strong> Use these to backup or share your configuration.</p>
+                    <p><strong>Clear:</strong> Removes all vessels, financial items, and resets the application.</p>
+                </div>
             </div>
         </div>
 
     </div>
 
     <script>
+        // Fleet vessel data - starts empty
+        const fleetData = {};
+
+        let selectedVesselId = null;
+
+        // Financial items data
+        const financialData = {};
+        let currentFinancialFilter = 'all';
+
+        // Predefined asset types for financial items
+        const assetTypes = [
+            { id: 'crew', title: 'Crew', subtypes: ['Captain', 'Mate', 'Passenger'] },
+            { id: 'equipment', title: 'Equipment', subtypes: [] },
+            { id: 'supplies', title: 'Supplies', subtypes: [] },
+            { id: 'fuel', title: 'Fuel', subtypes: [] },
+            { id: 'vessel', title: 'Vessel', subtypes: [] }
+        ];
+
+        // Cost parameters
+        const costParameters = {
+            fuelPricePerGallon: 4.85,
+            laborRateRegular: 75,
+            laborRateOvertime: 112.50,
+            equipmentRentalBase: 150
+        };
+
         // Navigation
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
@@ -671,7 +1508,890 @@
             closeSidebar();
         }
 
-        // Coordinate Converter Functions
+        // Fleet Selection - Enhanced Collapsible Version
+        function toggleFleetSelector() {
+            const fleetSelector = document.getElementById('fleet-section');
+            fleetSelector.classList.toggle('expanded');
+            
+            // Render fleet options when expanded
+            if (fleetSelector.classList.contains('expanded')) {
+                renderFleetOptions();
+            }
+        }
+
+        function renderFleetOptions() {
+            const container = document.getElementById('fleet-options-inner');
+            container.innerHTML = '';
+            
+            // Get vessels from financial data
+            const vessels = Object.keys(financialData).filter(id => financialData[id].assetType === 'vessel');
+            
+            // Add "None" option
+            const noneOption = document.createElement('div');
+            noneOption.className = `fleet-option ${selectedVesselId === null ? 'selected' : ''}`;
+            noneOption.onclick = () => selectVessel(null);
+            noneOption.innerHTML = `
+                <div class="fleet-option-name">None</div>
+                <div class="fleet-option-specs">No vessel selected</div>
+            `;
+            container.appendChild(noneOption);
+            
+            // Add vessels from financial data
+            vessels.forEach(vesselId => {
+                const vessel = financialData[vesselId];
+                const option = document.createElement('div');
+                option.className = `fleet-option ${vesselId === selectedVesselId ? 'selected' : ''}`;
+                option.onclick = () => selectVessel(vesselId);
+                
+                const statusText = vessel.includedInMission ? 'IN MISSION' : 'Available';
+                const statusClass = vessel.includedInMission ? 'style="color: #00FF7F; font-weight: 600;"' : '';
+                
+                option.innerHTML = `
+                    <div class="fleet-option-name">${vessel.name} - ${vessel.vesselType || 'Vessel'}</div>
+                    <div class="fleet-option-specs">
+                        Cruise: ${vessel.cruiseSpeed || 0}kt • Tow: ${vessel.towSpeed || 0}kt • Fuel: ${vessel.fuelRate || 0} gal/hr<br>
+                        Status: <span ${statusClass}>${statusText}</span>
+                    </div>
+                `;
+                
+                container.appendChild(option);
+            });
+            
+            // Auto-select first "IN MISSION" vessel if none currently selected
+            if (selectedVesselId === null) {
+                const inMissionVessel = vessels.find(id => financialData[id].includedInMission);
+                if (inMissionVessel) {
+                    selectVessel(inMissionVessel);
+                }
+            }
+        }
+
+        function selectVessel(vesselId) {
+            selectedVesselId = vesselId;
+            
+            if (vesselId === null) {
+                // Handle "None" selection
+                document.getElementById('selected-vessel-display').textContent = 'Vessel: None';
+                document.getElementById('selected-vessel-specs').textContent = 'No vessel selected';
+                
+                // Clear placeholders
+                document.getElementById('cruise-speed').placeholder = '';
+                document.getElementById('tow-speed').placeholder = '';
+                
+                // Clear values but set crew to default 1
+                document.getElementById('cruise-speed').value = '';
+                document.getElementById('tow-speed').value = '';
+                document.getElementById('crew-size').value = 1;
+            } else {
+                const vessel = financialData[vesselId];
+                
+                if (vessel && vessel.assetType === 'vessel') {
+                    // Update the header display
+                    document.getElementById('selected-vessel-display').textContent = `Vessel: ${vessel.name} - ${vessel.vesselType || 'Vessel'}`;
+                    document.getElementById('selected-vessel-specs').textContent = 
+                        `Cruise: ${vessel.cruiseSpeed || 0}kt • Tow: ${vessel.towSpeed || 0}kt • Fuel: ${vessel.fuelRate || 0} gal/hr`;
+                    
+                    // Update placeholders in departure details
+                    document.getElementById('cruise-speed').placeholder = vessel.cruiseSpeed || '';
+                    document.getElementById('tow-speed').placeholder = vessel.towSpeed || '';
+                    
+                    // Auto-populate departure details with vessel info
+                    populateDepartureDetails(vessel);
+                } else {
+                    // Fallback if vessel not found
+                    selectVessel(null);
+                    return;
+                }
+            }
+            
+            // Update fleet options display
+            renderFleetOptions();
+            
+            // Close the fleet selector
+            document.getElementById('fleet-section').classList.remove('expanded');
+            
+            // Auto-save
+            autoSave();
+        }
+
+        function populateDepartureDetails(vessel) {
+            // Auto-fill but keep editable
+            const cruiseSpeedInput = document.getElementById('cruise-speed');
+            const towSpeedInput = document.getElementById('tow-speed');
+            
+            // Only populate if fields are empty to preserve user edits
+            if (!cruiseSpeedInput.value) {
+                cruiseSpeedInput.value = vessel.cruiseSpeed || '';
+            }
+            if (!towSpeedInput.value) {
+                towSpeedInput.value = vessel.towSpeed || '';
+            }
+        }
+
+        // Vessel management moved to Financials page
+        // Vessels are now created as financial items with technical specifications
+        
+        function showAddVesselMessage() {
+            alert('Vessels are now managed in the Financials page.\n\nTo add a vessel:\n1. Go to Financials\n2. Click "Add Asset" and select "Vessel"\n3. Fill in technical specs and costs\n4. Toggle "IN MISSION" to use in Mission Planner');
+        }
+
+        function showRemoveVesselMessage() {
+            alert('Vessels are now managed in the Financials page.\n\nTo remove a vessel:\n1. Go to Financials\n2. Find the vessel in the list\n3. Click "Remove Item" button');
+        }
+
+        // Asset Type Selector Management
+        function toggleAssetSelector() {
+            const assetSelector = document.getElementById('asset-selector');
+            assetSelector.classList.toggle('expanded');
+            
+            if (assetSelector.classList.contains('expanded')) {
+                renderAssetOptions();
+            }
+        }
+
+        function renderAssetOptions() {
+            const container = document.getElementById('asset-options-inner');
+            container.innerHTML = '';
+            
+            assetTypes.forEach(assetType => {
+                const option = document.createElement('div');
+                option.className = 'fleet-option';
+                option.onclick = () => selectAssetType(assetType);
+                
+                const subtypeText = assetType.subtypes.length > 0 ? 
+                    `<br>Subtypes: ${assetType.subtypes.join(', ')}` : 
+                    '<br>General category';
+                
+                option.innerHTML = `
+                    <div class="fleet-option-name">${assetType.title}</div>
+                    <div class="fleet-option-specs">${subtypeText}</div>
+                `;
+                
+                container.appendChild(option);
+            });
+        }
+
+        function selectAssetType(assetType) {
+            // Close the asset selector
+            document.getElementById('asset-selector').classList.remove('expanded');
+            
+            // Create new financial item with default values
+            addFinancialItem(assetType);
+        }
+
+        function addFinancialItem(assetType) {
+            const itemId = 'financial-' + Date.now();
+            
+            // Default name based on asset type
+            let defaultName = assetType.title;
+            if (assetType.subtypes.length > 0) {
+                defaultName = assetType.subtypes[0]; // Use first subtype as default
+            }
+            
+            financialData[itemId] = {
+                assetType: assetType.id,
+                title: assetType.title,
+                name: defaultName,
+                cost: 0,
+                costCurrency: 'USD',
+                costPeriod: 'hour',
+                fee: 0,
+                feeCurrency: 'USD',
+                feePeriod: 'hour',
+                weightValue: 0,
+                weightUnit: 'Standard',
+                includedInMission: false,
+                subtypes: assetType.subtypes,
+                isSaved: false,
+                // Fuel-specific fields
+                quantity: 0,
+                quantityUnit: 'Gallons',
+                // Vessel-specific fields
+                cruiseSpeed: 0,
+                towSpeed: 0,
+                fuelRate: 0,
+                fuelCostPerGallon: 4.85,
+                fuelCostCurrency: 'USD',
+                vesselType: 'Tug Boat'
+            };
+            
+            renderFinancialItems();
+            renderFleetOptions(); // Update Mission Planner vessel list
+            updateCrewSizeFromFinancials(); // Update crew size in Mission Planner
+            autoSave();
+        }
+
+        function removeFinancialItem(itemId) {
+            if (confirm(`Are you sure you want to remove ${financialData[itemId].name}?`)) {
+                delete financialData[itemId];
+                renderFinancialItems();
+                renderFleetOptions(); // Update Mission Planner vessel list
+                autoSave();
+            }
+        }
+
+        function toggleFinancialMissionStatus(itemId) {
+            financialData[itemId].includedInMission = !financialData[itemId].includedInMission;
+            renderFinancialItems();
+            renderFleetOptions(); // Update Mission Planner vessel list
+            updateCrewSizeFromFinancials(); // Update crew size in Mission Planner
+            autoSave();
+        }
+
+
+        function filterFinancials(filterType) {
+            currentFinancialFilter = filterType;
+            
+            // Update button states
+            document.getElementById('show-all-btn').classList.toggle('active', filterType === 'all');
+            document.getElementById('show-active-btn').classList.toggle('active', filterType === 'active');
+            
+            renderFinancialItems();
+        }
+
+        function renderFinancialItems() {
+            const container = document.getElementById('financials-list');
+            container.innerHTML = '';
+            
+            const items = Object.keys(financialData);
+            const filteredItems = items.filter(itemId => {
+                if (currentFinancialFilter === 'active') {
+                    return financialData[itemId].includedInMission;
+                }
+                return true; // 'all' filter
+            });
+            
+            if (filteredItems.length === 0) {
+                const emptyMessage = currentFinancialFilter === 'active' ? 
+                    'No items currently included in mission calculations.' :
+                    'No financial items added yet. Select an asset type above to get started.';
+                    
+                container.innerHTML = `
+                    <div style="text-align: center; color: #888; padding: 40px; font-style: italic;">
+                        ${emptyMessage}
+                    </div>
+                `;
+                return;
+            }
+            
+            filteredItems.forEach(itemId => {
+                const item = financialData[itemId];
+                const itemElement = document.createElement('div');
+                const isExpanded = !item.isSaved; // Only expand if not saved
+                itemElement.className = `financial-item ${isExpanded ? 'expanded' : ''} ${item.includedInMission ? 'mission-active' : 'mission-inactive'}`;
+                
+                // Build subtype dropdown for crew
+                let nameField = `<input type="text" id="name-${itemId}" value="${item.name || ''}" onchange="updateFinancialItem('${itemId}', 'name', this.value)" class="financial-input" style="width: 100%;" placeholder="Enter name (e.g., Sea Guardian, Captain Smith)">`;
+                
+                if (item.subtypes && item.subtypes.length > 0) {
+                    nameField = `
+                        <select id="name-${itemId}" onchange="updateFinancialItem('${itemId}', 'name', this.value)" class="financial-select" style="width: 100%;">
+                            ${item.subtypes.map(subtype => 
+                                `<option value="${subtype}" ${item.name === subtype ? 'selected' : ''}>${subtype}</option>`
+                            ).join('')}
+                        </select>
+                    `;
+                }
+                
+                itemElement.innerHTML = `
+                    <div class="financial-item-header" onclick="toggleFinancialItem('${itemId}')">
+                        <div>
+                            <div class="financial-item-title">${item.title}</div>
+                            <div class="financial-item-name">${item.name} - ${item.costCurrency} ${item.cost}/${item.assetType === 'fuel' ? (item.quantityUnit === 'Gallons' ? 'gallon' : 'liter') : item.costPeriod}</div>
+                        </div>
+                        <div class="financial-item-controls" onclick="event.stopPropagation()">
+                            <button class="financial-toggle ${item.includedInMission ? 'active' : ''}" 
+                                    onclick="toggleFinancialMissionStatus('${itemId}')">
+                                ${item.includedInMission ? 'IN MISSION' : 'EXCLUDED'}
+                            </button>
+                        </div>
+                    </div>
+                    <div class="financial-item-details" id="details-${itemId}">
+                        <div class="financial-item-details-inner">
+                            <div class="financial-form-group">
+                                <label>Name/Type</label>
+                                ${nameField}
+                            </div>
+                            ${item.assetType === 'fuel' ? `
+                            <div class="financial-form-group">
+                                <label>Quantity</label>
+                                <div class="financial-input-group">
+                                    <input type="number" id="quantity-${itemId}" value="${item.quantity || ''}" step="0.01"
+                                           onchange="updateFinancialItem('${itemId}', 'quantity', parseFloat(this.value) || 0)"
+                                           class="financial-input main-input" placeholder="Enter quantity (e.g., 500)">
+                                    <select id="quantity-unit-${itemId}" onchange="updateFinancialItem('${itemId}', 'quantityUnit', this.value)"
+                                            class="financial-select weight-unit-selector">
+                                        <option value="Gallons" ${item.quantityUnit === 'Gallons' ? 'selected' : ''}>Gallons</option>
+                                        <option value="Liters" ${item.quantityUnit === 'Liters' ? 'selected' : ''}>Liters</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="financial-form-group">
+                                <label>Cost per ${item.quantityUnit === 'Gallons' ? 'Gallon' : 'Liter'}</label>
+                                <div class="financial-input-group">
+                                    <input type="number" id="cost-${itemId}" value="${item.cost || ''}" step="0.01" 
+                                           onchange="updateFinancialItem('${itemId}', 'cost', parseFloat(this.value) || 0)"
+                                           class="financial-input main-input" placeholder="Cost per ${item.quantityUnit === 'Gallons' ? 'gallon' : 'liter'} (e.g., 4.85)">
+                                    <select id="cost-currency-${itemId}" onchange="updateFinancialItem('${itemId}', 'costCurrency', this.value)"
+                                            class="financial-select currency-selector">
+                                        <option value="USD" ${item.costCurrency === 'USD' ? 'selected' : ''}>USD</option>
+                                        <option value="GBP" ${item.costCurrency === 'GBP' ? 'selected' : ''}>GBP</option>
+                                    </select>
+                                </div>
+                            </div>
+                            ` : item.assetType === 'vessel' ? `
+                            <div class="financial-form-group">
+                                <label>Vessel Type</label>
+                                <select id="vessel-type-${itemId}" onchange="updateFinancialItem('${itemId}', 'vesselType', this.value)"
+                                        class="financial-select" style="width: 100%;">
+                                    <option value="Tug Boat" ${item.vesselType === 'Tug Boat' ? 'selected' : ''}>Tug Boat</option>
+                                    <option value="Multi-Purpose" ${item.vesselType === 'Multi-Purpose' ? 'selected' : ''}>Multi-Purpose</option>
+                                    <option value="Response" ${item.vesselType === 'Response' ? 'selected' : ''}>Response</option>
+                                    <option value="Utility" ${item.vesselType === 'Utility' ? 'selected' : ''}>Utility</option>
+                                    <option value="Salvage" ${item.vesselType === 'Salvage' ? 'selected' : ''}>Salvage</option>
+                                </select>
+                            </div>
+                            <div class="financial-form-group">
+                                <label>Cruise Speed</label>
+                                <div class="financial-input-group">
+                                    <input type="number" id="cruise-speed-${itemId}" value="${item.cruiseSpeed || ''}" step="0.1"
+                                           onchange="updateFinancialItem('${itemId}', 'cruiseSpeed', parseFloat(this.value) || 0)"
+                                           class="financial-input main-input" placeholder="Cruising speed (e.g., 25.0)">
+                                    <select class="financial-select weight-unit-selector" disabled>
+                                        <option>Knots</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="financial-form-group">
+                                <label>Tow Speed</label>
+                                <div class="financial-input-group">
+                                    <input type="number" id="tow-speed-${itemId}" value="${item.towSpeed || ''}" step="0.1"
+                                           onchange="updateFinancialItem('${itemId}', 'towSpeed', parseFloat(this.value) || 0)"
+                                           class="financial-input main-input" placeholder="Towing speed (e.g., 8.0)">
+                                    <select class="financial-select weight-unit-selector" disabled>
+                                        <option>Knots</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="financial-form-group">
+                                <label>Fuel Rate</label>
+                                <div class="financial-input-group">
+                                    <input type="number" id="fuel-rate-${itemId}" value="${item.fuelRate || ''}" step="0.1"
+                                           onchange="updateFinancialItem('${itemId}', 'fuelRate', parseFloat(this.value) || 0)"
+                                           class="financial-input main-input" placeholder="Fuel consumption (e.g., 40.0)">
+                                    <select class="financial-select weight-unit-selector" disabled>
+                                        <option>gal/hr</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="financial-form-group">
+                                <label>Fuel Cost per Gallon</label>
+                                <div class="financial-input-group">
+                                    <input type="number" id="fuel-cost-${itemId}" value="${item.fuelCostPerGallon || ''}" step="0.01"
+                                           onchange="updateFinancialItem('${itemId}', 'fuelCostPerGallon', parseFloat(this.value) || 4.85)"
+                                           class="financial-input main-input" placeholder="Cost per gallon (e.g., 4.85)">
+                                    <select id="fuel-cost-currency-${itemId}" onchange="updateFinancialItem('${itemId}', 'fuelCostCurrency', this.value)"
+                                            class="financial-select currency-selector">
+                                        <option value="USD" ${item.fuelCostCurrency === 'USD' || !item.fuelCostCurrency ? 'selected' : ''}>USD</option>
+                                        <option value="GBP" ${item.fuelCostCurrency === 'GBP' ? 'selected' : ''}>GBP</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="financial-form-group">
+                                <label>Cost per Hour</label>
+                                <div class="financial-input-group">
+                                    <input type="number" id="cost-${itemId}" value="${item.cost || ''}" step="0.01" 
+                                           onchange="updateFinancialItem('${itemId}', 'cost', parseFloat(this.value) || 0)"
+                                           class="financial-input main-input" placeholder="Hourly cost (e.g., 500.00)">
+                                    <select id="cost-currency-${itemId}" onchange="updateFinancialItem('${itemId}', 'costCurrency', this.value)"
+                                            class="financial-select currency-selector">
+                                        <option value="USD" ${item.costCurrency === 'USD' ? 'selected' : ''}>USD</option>
+                                        <option value="GBP" ${item.costCurrency === 'GBP' ? 'selected' : ''}>GBP</option>
+                                    </select>
+                                </div>
+                            </div>
+                            ` : `
+                            <div class="financial-form-group">
+                                <label>Cost</label>
+                                <div class="financial-input-group">
+                                    <input type="number" id="cost-${itemId}" value="${item.cost || ''}" step="0.01" 
+                                           onchange="updateFinancialItem('${itemId}', 'cost', parseFloat(this.value) || 0)"
+                                           class="financial-input main-input" placeholder="Hourly cost (e.g., 85.00)">
+                                    <select id="cost-currency-${itemId}" onchange="updateFinancialItem('${itemId}', 'costCurrency', this.value)"
+                                            class="financial-select currency-selector">
+                                        <option value="USD" ${item.costCurrency === 'USD' ? 'selected' : ''}>USD</option>
+                                        <option value="GBP" ${item.costCurrency === 'GBP' ? 'selected' : ''}>GBP</option>
+                                    </select>
+                                    <select id="cost-period-${itemId}" onchange="updateFinancialItem('${itemId}', 'costPeriod', this.value)"
+                                            class="financial-select period-selector">
+                                        <option value="hour" ${item.costPeriod === 'hour' ? 'selected' : ''}>per hour</option>
+                                    </select>
+                                </div>
+                            </div>
+                            `}
+                            ${item.assetType === 'fuel' ? `
+                            <div class="financial-form-group">
+                                <label>Customer Fee per ${item.quantityUnit === 'Gallons' ? 'Gallon' : 'Liter'}</label>
+                                <div class="financial-input-group">
+                                    <input type="number" id="fee-${itemId}" value="${item.fee || ''}" step="0.01"
+                                           onchange="updateFinancialItem('${itemId}', 'fee', parseFloat(this.value) || 0)"
+                                           class="financial-input main-input" placeholder="Fee per ${item.quantityUnit === 'Gallons' ? 'gallon' : 'liter'} (e.g., 6.50)">
+                                    <select id="fee-currency-${itemId}" onchange="updateFinancialItem('${itemId}', 'feeCurrency', this.value)"
+                                            class="financial-select currency-selector">
+                                        <option value="USD" ${item.feeCurrency === 'USD' ? 'selected' : ''}>USD</option>
+                                        <option value="GBP" ${item.feeCurrency === 'GBP' ? 'selected' : ''}>GBP</option>
+                                    </select>
+                                </div>
+                            </div>
+                            ` : `
+                            <div class="financial-form-group">
+                                <label>Customer Fee</label>
+                                <div class="financial-input-group">
+                                    <input type="number" id="fee-${itemId}" value="${item.fee || ''}" step="0.01"
+                                           onchange="updateFinancialItem('${itemId}', 'fee', parseFloat(this.value) || 0)"
+                                           class="financial-input main-input" placeholder="Customer fee (e.g., 125.00)">
+                                    <select id="fee-currency-${itemId}" onchange="updateFinancialItem('${itemId}', 'feeCurrency', this.value)"
+                                            class="financial-select currency-selector">
+                                        <option value="USD" ${item.feeCurrency === 'USD' ? 'selected' : ''}>USD</option>
+                                        <option value="GBP" ${item.feeCurrency === 'GBP' ? 'selected' : ''}>GBP</option>
+                                    </select>
+                                    <select id="fee-period-${itemId}" onchange="updateFinancialItem('${itemId}', 'feePeriod', this.value)"
+                                            class="financial-select period-selector">
+                                        <option value="hour" ${item.feePeriod === 'hour' ? 'selected' : ''}>per hour</option>
+                                        <option value="day" ${item.feePeriod === 'day' ? 'selected' : ''}>per day (24h)</option>
+                                        <option value="week" ${item.feePeriod === 'week' ? 'selected' : ''}>per week (168h)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="financial-form-group">
+                                <label>Weight</label>
+                                <div class="financial-input-group">
+                                    <input type="number" id="weight-value-${itemId}" value="${item.weightValue || ''}" step="0.01"
+                                           onchange="updateFinancialItem('${itemId}', 'weightValue', parseFloat(this.value) || 0)"
+                                           class="financial-input main-input" placeholder="Weight (e.g., 150.5)">
+                                    <select id="weight-unit-${itemId}" onchange="updateFinancialItem('${itemId}', 'weightUnit', this.value)"
+                                            class="financial-select weight-unit-selector">
+                                        <option value="Standard" ${item.weightUnit === 'Standard' ? 'selected' : ''}>Standard</option>
+                                        <option value="Metric" ${item.weightUnit === 'Metric' ? 'selected' : ''}>Metric</option>
+                                    </select>
+                                </div>
+                            </div>
+                            `}
+                            <div class="financial-form-group">
+                                <label>Profit Calculation</label>
+                                <div style="background: rgba(0, 255, 127, 0.1); border: 1px solid #00FF7F; border-radius: 8px; padding: 12px; color: #00FF7F; font-weight: 600;">
+                                    ${item.assetType === 'fuel' ? 
+                                        `Per ${item.quantityUnit === 'Gallons' ? 'Gallon' : 'Liter'}: ${item.feeCurrency} ${(item.fee - item.cost).toFixed(2)}<br>
+                                         Total (${item.quantity || 0} ${item.quantityUnit}): ${item.feeCurrency} ${((item.fee - item.cost) * (item.quantity || 0)).toFixed(2)}` :
+                                        (() => {
+                                            // Convert customer fee to hourly rate for comparison
+                                            const feePerHour = item.feePeriod === 'day' ? item.fee / 24 : 
+                                                             item.feePeriod === 'week' ? item.fee / 168 : 
+                                                             item.fee;
+                                            const profitPerHour = feePerHour - item.cost;
+                                            return `Hourly Profit: ${item.feeCurrency} ${profitPerHour.toFixed(2)}/hour<br>
+                                                    Customer Fee: ${item.feeCurrency} ${item.fee.toFixed(2)} per ${item.feePeriod}${item.feePeriod === 'day' ? ' (24h)' : item.feePeriod === 'week' ? ' (168h)' : ''}`;
+                                        })()
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="financial-item-actions">
+                            <button class="btn-save-financial" onclick="saveFinancialItem('${itemId}')">Save</button>
+                            <button class="btn-remove-financial" onclick="removeFinancialItem('${itemId}')">Remove Item</button>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(itemElement);
+            });
+        }
+
+        function toggleFinancialItem(itemId) {
+            const detailsElement = document.getElementById(`details-${itemId}`);
+            const itemElement = detailsElement.closest('.financial-item');
+            
+            itemElement.classList.toggle('expanded');
+        }
+
+        function updateFinancialItem(itemId, field, value) {
+            financialData[itemId][field] = value;
+            renderFinancialItems();
+            renderFleetOptions(); // Update Mission Planner vessel list
+            updateCrewSizeFromFinancials(); // Update crew size in Mission Planner
+            autoSave();
+        }
+
+        function saveFinancialItem(itemId) {
+            // Mark item as saved and collapse it
+            financialData[itemId].isSaved = true;
+            
+            // Re-render to show collapsed state (no manual DOM manipulation)
+            renderFinancialItems();
+            renderFleetOptions(); // Update Mission Planner vessel list
+            updateCrewSizeFromFinancials(); // Update crew size in Mission Planner
+            autoSave();
+        }
+
+        // Priority Indicator
+        function updatePriorityIndicator() {
+            const priority = document.getElementById('mission-priority').value;
+            const fleetSection = document.getElementById('fleet-section');
+            
+            // Remove existing priority classes
+            fleetSection.classList.remove('priority-routine', 'priority-urgent', 'priority-emergency');
+            
+            // Add appropriate priority class
+            fleetSection.classList.add('priority-' + priority);
+        }
+
+        // Weather Check
+        function checkWeatherWindow() {
+            const conditions = [
+                'Favorable conditions - Light winds, calm seas',
+                'Moderate conditions - 15-20kt winds, 2-4ft seas', 
+                'Challenging conditions - 20-25kt winds, 4-6ft seas',
+                'Poor conditions - Consider postponing mission'
+            ];
+            const randomCondition = conditions[Math.floor(Math.random() * conditions.length)];
+            alert(`Marine Weather Check:\n\n${randomCondition}\n\nLast updated: ${new Date().toLocaleTimeString()}`);
+        }
+
+        // Mission Calculator
+        function calculateMission() {
+            try {
+                // Check if vessel is selected
+                if (selectedVesselId === null) {
+                    showMissionError('Please select a vessel before calculating mission.');
+                    return;
+                }
+                
+                // Get selected vessel
+                const vessel = financialData[selectedVesselId];
+                
+                // Get departure date/time
+                const departureDate = document.getElementById('departure-date').value;
+                const departureTime = document.getElementById('departure-time').value;
+                const timeFormat = document.getElementById('time-format').value;
+
+                // Get inputs with vessel defaults
+                const cruiseSpeed = parseFloat(document.getElementById('cruise-speed').value) || vessel.cruiseSpeed;
+                const towSpeed = parseFloat(document.getElementById('tow-speed').value) || vessel.towSpeed;
+                const cruiseDistance = parseFloat(document.getElementById('cruise-distance').value);
+                const towDistance = parseFloat(document.getElementById('tow-distance').value);
+                const setupTime = parseFloat(document.getElementById('setup-time').value);
+                const crewSize = parseFloat(document.getElementById('crew-size').value) || 1;
+                const weatherImpact = parseFloat(document.getElementById('weather-impact').value) || 0;
+
+                // Validate inputs
+                if (isNaN(cruiseDistance) || isNaN(towDistance) || isNaN(setupTime)) {
+                    showMissionError('Please enter all distance and setup time values.');
+                    return;
+                }
+
+                if (cruiseSpeed <= 0 || towSpeed <= 0 || cruiseDistance < 0 || towDistance < 0 || setupTime < 0) {
+                    showMissionError('Please enter positive values.');
+                    return;
+                }
+
+                // Convert units to consistent format (knots)
+                const cruiseSpeedKnots = document.getElementById('cruise-speed-unit').value === 'mph' ? 
+                    cruiseSpeed * 0.868976 : cruiseSpeed;
+                const towSpeedKnots = document.getElementById('tow-speed-unit').value === 'mph' ? 
+                    towSpeed * 0.868976 : towSpeed;
+
+                // Convert distances to nautical miles
+                const cruiseDistanceNM = document.getElementById('cruise-distance-unit').value === 'sm' ? 
+                    cruiseDistance * 0.868976 : cruiseDistance;
+                const towDistanceNM = document.getElementById('tow-distance-unit').value === 'sm' ? 
+                    towDistance * 0.868976 : towDistance;
+
+                // Convert setup time to hours
+                const setupTimeHours = document.getElementById('setup-time-unit').value === 'minutes' ? 
+                    setupTime / 60 : setupTime;
+
+                // Calculate times (hours)
+                const cruisingTime = cruiseDistanceNM / cruiseSpeedKnots;
+                const towingTime = towDistanceNM / towSpeedKnots;
+                
+                // Apply weather impact
+                const weatherMultiplier = 1 + (weatherImpact / 100);
+                const adjustedCruisingTime = cruisingTime * weatherMultiplier;
+                const adjustedTowingTime = towingTime * weatherMultiplier;
+                const totalTime = adjustedCruisingTime + adjustedTowingTime + setupTimeHours;
+
+                // Calculate fuel requirements based on vessel
+                const cruisingFuel = (adjustedCruisingTime * vessel.fuelRate);
+                const towingFuel = (adjustedTowingTime * vessel.fuelRate);
+                const totalFuel = cruisingFuel + towingFuel;
+
+                // Calculate vessel costs: (Fuel Rate × Hours × Price/Gallon) + (Cost/Hour × Hours)
+                const fuelCostPerGallon = vessel.fuelCostPerGallon || costParameters.fuelPricePerGallon;
+                const fuelCost = totalFuel * fuelCostPerGallon;
+                const vesselHourlyCost = (vessel.cost || 0) * totalTime;
+                const totalVesselCost = fuelCost + vesselHourlyCost;
+                
+                // Get crew members in mission and calculate individual costs
+                const crewMembers = Object.values(financialData).filter(item => 
+                    item.assetType === 'crew' && item.includedInMission
+                );
+                
+                let totalLaborCost = 0;
+                let totalOvertimeCost = 0;
+                const crewCostDetails = [];
+                
+                if (crewMembers.length > 0) {
+                    // Calculate costs for each crew member
+                    crewMembers.forEach(crew => {
+                        const hourlyRate = crew.cost || costParameters.laborRateRegular;
+                        const regularHours = Math.min(totalTime, 8);
+                        const overtimeHours = Math.max(0, totalTime - 8);
+                        
+                        const crewRegularCost = regularHours * hourlyRate;
+                        const crewOvertimeCost = overtimeHours * hourlyRate * 1.5; // Overtime at 1.5x rate
+                        
+                        totalLaborCost += crewRegularCost;
+                        totalOvertimeCost += crewOvertimeCost;
+                        
+                        crewCostDetails.push({
+                            name: crew.name,
+                            role: crew.nameType || 'Crew Member',
+                            hourlyRate: hourlyRate,
+                            regularHours: regularHours,
+                            overtimeHours: overtimeHours,
+                            regularCost: crewRegularCost,
+                            overtimeCost: crewOvertimeCost,
+                            totalCost: crewRegularCost + crewOvertimeCost
+                        });
+                    });
+                } else {
+                    // Fallback to generic calculation if no crew members defined
+                    const regularHours = Math.min(totalTime, 8) * crewSize;
+                    const overtimeHours = Math.max(0, totalTime - 8) * crewSize;
+                    totalLaborCost = regularHours * costParameters.laborRateRegular;
+                    totalOvertimeCost = overtimeHours * costParameters.laborRateOvertime;
+                    
+                    crewCostDetails.push({
+                        name: 'Generic Crew',
+                        role: 'Crew Member',
+                        hourlyRate: costParameters.laborRateRegular,
+                        regularHours: regularHours / crewSize,
+                        overtimeHours: overtimeHours / crewSize,
+                        regularCost: totalLaborCost,
+                        overtimeCost: totalOvertimeCost,
+                        totalCost: totalLaborCost + totalOvertimeCost
+                    });
+                }
+                
+                const laborCost = totalLaborCost;
+                const overtimeCost = totalOvertimeCost;
+                
+                // Equipment costs based on mission type
+                const missionType = document.getElementById('mission-type').value;
+                const equipmentMultiplier = missionType === 'Emergency Salvage' ? 2.5 : 
+                                          missionType === 'Equipment Transport' ? 1.5 : 1.0;
+                const equipmentCost = costParameters.equipmentRentalBase * equipmentMultiplier;
+                
+                const totalCost = totalVesselCost + laborCost + overtimeCost + equipmentCost;
+
+                // Calculate mission timeline if departure date/time provided
+                let startDateTime = null;
+                let endDateTime = null;
+
+                if (departureDate && departureTime) {
+                    try {
+                        startDateTime = parseDateTime(departureDate, departureTime, timeFormat);
+                        if (startDateTime) {
+                            endDateTime = new Date(startDateTime.getTime() + (totalTime * 60 * 60 * 1000));
+                            
+                            // Update timeline display
+                            document.getElementById('mission-start').textContent = formatDateTime(startDateTime, timeFormat);
+                            document.getElementById('mission-end').textContent = formatDateTime(endDateTime, timeFormat);
+                            document.getElementById('mission-duration').textContent = formatTime(totalTime);
+                        }
+                    } catch (timeError) {
+                        // If time parsing fails, continue without timeline
+                        document.getElementById('mission-start').textContent = '--';
+                        document.getElementById('mission-end').textContent = '--';
+                    }
+                } else {
+                    document.getElementById('mission-start').textContent = '--';
+                    document.getElementById('mission-end').textContent = '--';
+                }
+
+                // Weather window assessment
+                const weatherCondition = weatherImpact > 25 ? 'Challenging' :
+                                       weatherImpact > 10 ? 'Moderate' : 'Favorable';
+                document.getElementById('weather-window').textContent = weatherCondition;
+
+                // Display results
+                document.getElementById('total-duration').textContent = formatTime(totalTime);
+                document.getElementById('cruising-time').textContent = formatTime(adjustedCruisingTime);
+                document.getElementById('towing-time').textContent = formatTime(adjustedTowingTime);
+                document.getElementById('setup-time-result').textContent = formatTime(setupTimeHours);
+                document.getElementById('fuel-required').textContent = `${Math.round(totalFuel)} gal`;
+                document.getElementById('selected-vessel').textContent = vessel.name;
+
+                // Display cost breakdown - show combined vessel cost
+                let vesselCostBreakdown = '';
+                if (fuelCost > 0 && vesselHourlyCost > 0) {
+                    vesselCostBreakdown = ` (Fuel: $${Math.round(fuelCost)} + Hourly: $${Math.round(vesselHourlyCost)})`;
+                } else if (fuelCost > 0) {
+                    vesselCostBreakdown = ` (${totalFuel.toFixed(1)} gal @ $${fuelCostPerGallon.toFixed(2)}/gal)`;
+                } else if (vesselHourlyCost > 0) {
+                    vesselCostBreakdown = ` (${totalTime.toFixed(1)}h @ $${vessel.cost}/h)`;
+                }
+                
+                document.getElementById('fuel-cost').parentElement.querySelector('.cost-label').textContent = 'Vessel Cost:';
+                document.getElementById('fuel-cost').textContent = `$${Math.round(totalVesselCost).toLocaleString()}${vesselCostBreakdown}`;
+                
+                // Populate individual crew costs
+                const crewCostsContainer = document.getElementById('crew-costs-container');
+                crewCostsContainer.innerHTML = '';
+                
+                crewCostDetails.forEach(crew => {
+                    const crewCostDiv = document.createElement('div');
+                    crewCostDiv.className = 'cost-item';
+                    crewCostDiv.innerHTML = `
+                        <span class="cost-label">${crew.name} (${crew.role}):</span>
+                        <span class="cost-value">$${Math.round(crew.totalCost).toLocaleString()}</span>
+                    `;
+                    crewCostsContainer.appendChild(crewCostDiv);
+                    
+                    // Add detail breakdown if there's overtime
+                    if (crew.overtimeCost > 0) {
+                        const detailDiv = document.createElement('div');
+                        detailDiv.className = 'cost-item';
+                        detailDiv.style.fontSize = '12px';
+                        detailDiv.style.opacity = '0.7';
+                        detailDiv.style.marginLeft = '20px';
+                        detailDiv.innerHTML = `
+                            <span class="cost-label">└ Regular (${crew.regularHours.toFixed(1)}h @ $${crew.hourlyRate}/h): $${Math.round(crew.regularCost)}</span>
+                        `;
+                        crewCostsContainer.appendChild(detailDiv);
+                        
+                        const overtimeDetailDiv = document.createElement('div');
+                        overtimeDetailDiv.className = 'cost-item';
+                        overtimeDetailDiv.style.fontSize = '12px';
+                        overtimeDetailDiv.style.opacity = '0.7';
+                        overtimeDetailDiv.style.marginLeft = '20px';
+                        overtimeDetailDiv.innerHTML = `
+                            <span class="cost-label">└ Overtime (${crew.overtimeHours.toFixed(1)}h @ $${(crew.hourlyRate * 1.5).toFixed(2)}/h): $${Math.round(crew.overtimeCost)}</span>
+                        `;
+                        crewCostsContainer.appendChild(overtimeDetailDiv);
+                    } else {
+                        const detailDiv = document.createElement('div');
+                        detailDiv.className = 'cost-item';
+                        detailDiv.style.fontSize = '12px';
+                        detailDiv.style.opacity = '0.7';
+                        detailDiv.style.marginLeft = '20px';
+                        detailDiv.innerHTML = `
+                            <span class="cost-label">└ ${crew.regularHours.toFixed(1)}h @ $${crew.hourlyRate}/h</span>
+                        `;
+                        crewCostsContainer.appendChild(detailDiv);
+                    }
+                });
+                
+                // Update total labor cost display
+                document.getElementById('total-labor-cost').textContent = `$${Math.round(laborCost + overtimeCost).toLocaleString()}`;
+                document.getElementById('equipment-cost').textContent = `$${Math.round(equipmentCost).toLocaleString()}`;
+                document.getElementById('total-cost').textContent = `$${Math.round(totalCost).toLocaleString()}`;
+
+                // Calculate and populate Fee For Service
+                const assetsWithCustomerFees = Object.values(financialData).filter(item => 
+                    item.includedInMission && item.fee && item.fee > 0
+                );
+                
+                const feeForServiceContainer = document.getElementById('fee-for-service-container');
+                feeForServiceContainer.innerHTML = '';
+                
+                let totalCustomerFees = 0;
+                
+                if (assetsWithCustomerFees.length > 0) {
+                    assetsWithCustomerFees.forEach(asset => {
+                        let feeAmount = asset.fee;
+                        
+                        // Calculate fee based on period 
+                        if (asset.feePeriod === 'hour') {
+                            feeAmount = asset.fee * totalTime;
+                        } else if (asset.feePeriod === 'day') {
+                            feeAmount = asset.fee * (totalTime / 24);
+                        } else if (asset.feePeriod === 'week') {
+                            feeAmount = asset.fee * (totalTime / 168);
+                        }
+                        // If no period specified or other period, use fee as-is (one-time fee)
+                        
+                        totalCustomerFees += feeAmount;
+                        
+                        const feeDiv = document.createElement('div');
+                        feeDiv.className = 'cost-item';
+                        
+                        let feeDescription = '';
+                        if (asset.feePeriod === 'hour') {
+                            feeDescription = ` (${totalTime.toFixed(1)}h @ $${asset.fee}/h)`;
+                        } else if (asset.feePeriod === 'day') {
+                            feeDescription = ` (${(totalTime / 24).toFixed(1)} days @ $${asset.fee}/day)`;
+                        } else if (asset.feePeriod === 'week') {
+                            feeDescription = ` (${(totalTime / 168).toFixed(2)} weeks @ $${asset.fee}/week)`;
+                        }
+                        
+                        feeDiv.innerHTML = `
+                            <span class="cost-label">${asset.name}${feeDescription}:</span>
+                            <span class="cost-value">$${Math.round(feeAmount).toLocaleString()}</span>
+                        `;
+                        feeForServiceContainer.appendChild(feeDiv);
+                    });
+                } else {
+                    const noFeesDiv = document.createElement('div');
+                    noFeesDiv.className = 'cost-item';
+                    noFeesDiv.style.fontStyle = 'italic';
+                    noFeesDiv.style.opacity = '0.7';
+                    noFeesDiv.innerHTML = `
+                        <span class="cost-label">No customer fees for mission assets</span>
+                        <span class="cost-value">--</span>
+                    `;
+                    feeForServiceContainer.appendChild(noFeesDiv);
+                }
+                
+                // Update fee total
+                document.getElementById('fee-total').textContent = totalCustomerFees > 0 ? 
+                    `$${Math.round(totalCustomerFees).toLocaleString()}` : '--';
+
+                document.getElementById('mission-results').style.display = 'block';
+                clearMissionError();
+
+            } catch (error) {
+                showMissionError('Error calculating mission: ' + error.message);
+            }
+        }
+
+        // Clear Mission Form
+        function clearMissionForm() {
+            // Reset form fields
+            document.querySelectorAll('#mission-page input[type="number"], #mission-page input[type="text"], #mission-page input[type="date"]').forEach(input => {
+                input.value = '';
+            });
+            
+            // Set crew size to default 1 if no vessel selected
+            if (selectedVesselId === null) {
+                document.getElementById('crew-size').value = 1;
+            }
+            
+            // Reset selects to first option
+            document.querySelectorAll('#mission-page select').forEach(select => {
+                select.selectedIndex = 0;
+            });
+            
+            // Hide results and clear priority indicator
+            document.getElementById('mission-results').style.display = 'none';
+            updatePriorityIndicator();
+            clearMissionError();
+            
+            // Reset vessel selection to none
+            selectVessel(null);
+        }
+
+        // Coordinate Converter Functions (Preserved from original)
         let isUpdating = false;
         let lastFocusedDDMField = null;
 
@@ -840,107 +2560,7 @@
             document.getElementById('coord-error').style.display = 'none';
         }
 
-        // Mission Planner Functions
-        function calculateMission() {
-            try {
-                // Get departure date/time
-                const departureDate = document.getElementById('departure-date').value;
-                const departureTime = document.getElementById('departure-time').value;
-                const timeFormat = document.getElementById('time-format').value;
-
-                // Get inputs
-                const cruiseSpeed = parseFloat(document.getElementById('cruise-speed').value);
-                const towSpeed = parseFloat(document.getElementById('tow-speed').value);
-                const cruiseDistance = parseFloat(document.getElementById('cruise-distance').value);
-                const towDistance = parseFloat(document.getElementById('tow-distance').value);
-                const setupTime = parseFloat(document.getElementById('setup-time').value);
-
-                // Validate inputs
-                if (isNaN(cruiseSpeed) || isNaN(towSpeed) || isNaN(cruiseDistance) || isNaN(towDistance) || isNaN(setupTime)) {
-                    showMissionError('Please enter all values.');
-                    return;
-                }
-
-                if (cruiseSpeed <= 0 || towSpeed <= 0 || cruiseDistance < 0 || towDistance < 0 || setupTime < 0) {
-                    showMissionError('Please enter positive values.');
-                    return;
-                }
-
-                // Convert units to consistent format (knots)
-                const cruiseSpeedKnots = document.getElementById('cruise-speed-unit').value === 'mph' ? 
-                    cruiseSpeed * 0.868976 : cruiseSpeed;
-                const towSpeedKnots = document.getElementById('tow-speed-unit').value === 'mph' ? 
-                    towSpeed * 0.868976 : towSpeed;
-
-                // Convert distances to nautical miles
-                const cruiseDistanceNM = document.getElementById('cruise-distance-unit').value === 'sm' ? 
-                    cruiseDistance * 0.868976 : cruiseDistance;
-                const towDistanceNM = document.getElementById('tow-distance-unit').value === 'sm' ? 
-                    towDistance * 0.868976 : towDistance;
-
-                // Convert setup time to hours
-                const setupTimeHours = document.getElementById('setup-time-unit').value === 'minutes' ? 
-                    setupTime / 60 : setupTime;
-
-                // Calculate times (hours)
-                const cruisingTime = cruiseDistanceNM / cruiseSpeedKnots;
-                const towingTime = towDistanceNM / towSpeedKnots;
-                const totalTime = cruisingTime + towingTime + setupTimeHours;
-
-                // Calculate mission timeline if departure date/time provided
-                let startDateTime = null;
-                let endDateTime = null;
-                let missionDates = '--';
-
-                if (departureDate && departureTime) {
-                    try {
-                        startDateTime = parseDateTime(departureDate, departureTime, timeFormat);
-                        if (startDateTime) {
-                            endDateTime = new Date(startDateTime.getTime() + (totalTime * 60 * 60 * 1000));
-                            
-                            // Format start and end times
-                            const startTimeStr = formatDateTime(startDateTime, timeFormat);
-                            const endTimeStr = formatDateTime(endDateTime, timeFormat);
-                            
-                            // Calculate mission dates
-                            const startDateStr = startDateTime.toDateString();
-                            const endDateStr = endDateTime.toDateString();
-                            
-                            if (startDateStr === endDateStr) {
-                                missionDates = startDateStr;
-                            } else {
-                                missionDates = `${startDateStr} - ${endDateStr}`;
-                            }
-                            
-                            // Update timeline display
-                            document.getElementById('mission-start').textContent = startTimeStr;
-                            document.getElementById('mission-end').textContent = endTimeStr;
-                            document.getElementById('mission-dates').textContent = missionDates;
-                            document.getElementById('mission-timeline').style.display = 'block';
-                        }
-                    } catch (timeError) {
-                        // If time parsing fails, continue without timeline
-                        document.getElementById('mission-timeline').style.display = 'none';
-                    }
-                } else {
-                    document.getElementById('mission-timeline').style.display = 'none';
-                }
-
-                // Display results
-                document.getElementById('total-duration').textContent = formatTime(totalTime);
-                document.getElementById('cruising-time').textContent = formatTime(cruisingTime);
-                document.getElementById('towing-time').textContent = formatTime(towingTime);
-                document.getElementById('setup-time-result').textContent = formatTime(setupTimeHours);
-
-                document.getElementById('mission-results').style.display = 'block';
-                clearMissionError();
-
-            } catch (error) {
-                showMissionError('Error calculating mission: ' + error.message);
-            }
-        }
-
-        // Parse date and time string into Date object
+        // Enhanced Mission Planner utility functions
         function parseDateTime(dateStr, timeStr, format) {
             if (!dateStr || !timeStr) return null;
 
@@ -978,7 +2598,6 @@
             return date;
         }
 
-        // Format Date object to string
         function formatDateTime(dateTime, format) {
             const date = dateTime.toLocaleDateString();
             let timeStr;
@@ -1016,6 +2635,175 @@
             document.getElementById('mission-error').style.display = 'none';
         }
 
+        // Application State Management
+        function saveApplicationState() {
+            try {
+                const appState = {
+                    fleetData: fleetData,
+                    financialData: financialData,
+                    selectedVesselId: selectedVesselId,
+                    currentFinancialFilter: currentFinancialFilter,
+                    lastSaved: new Date().toISOString(),
+                    version: '1.0'
+                };
+                localStorage.setItem('seaborneAppState', JSON.stringify(appState));
+                console.log('Application state saved successfully');
+            } catch (error) {
+                console.error('Failed to save application state:', error);
+                alert('Failed to save data. Storage may be full.');
+            }
+        }
+
+        function loadApplicationState() {
+            try {
+                const saved = localStorage.getItem('seaborneAppState');
+                if (saved) {
+                    const appState = JSON.parse(saved);
+                    
+                    // Load data with fallbacks
+                    Object.assign(fleetData, appState.fleetData || {});
+                    Object.assign(financialData, appState.financialData || {});
+                    selectedVesselId = appState.selectedVesselId || null;
+                    currentFinancialFilter = appState.currentFinancialFilter || 'all';
+                    
+                    console.log('Application state loaded successfully');
+                    return true;
+                }
+            } catch (error) {
+                console.error('Failed to load application state:', error);
+                alert('Failed to load saved data. Using defaults.');
+            }
+            return false;
+        }
+
+        function clearAllData() {
+            if (confirm('Are you sure you want to clear all data? This action cannot be undone.')) {
+                // Clear local storage
+                localStorage.removeItem('seaborneAppState');
+                
+                // Reset application state
+                Object.keys(fleetData).forEach(key => delete fleetData[key]);
+                Object.keys(financialData).forEach(key => delete financialData[key]);
+                selectedVesselId = null;
+                currentFinancialFilter = 'all';
+                
+                // Refresh UI
+                renderFleetOptions();
+                renderFinancialItems();
+                filterFinancials('all');
+                selectVessel(null);
+                
+                // Reset forms
+                clearMissionForm();
+                clearCoordinates();
+                
+                console.log('All data cleared successfully');
+                alert('All data has been cleared.');
+            }
+        }
+
+        function exportData() {
+            try {
+                const data = {
+                    fleetData: fleetData,
+                    financialData: financialData,
+                    selectedVesselId: selectedVesselId,
+                    currentFinancialFilter: currentFinancialFilter,
+                    exportDate: new Date().toISOString(),
+                    version: '1.0'
+                };
+                
+                const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `seaborne-data-${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                console.log('Data exported successfully');
+            } catch (error) {
+                console.error('Failed to export data:', error);
+                alert('Failed to export data.');
+            }
+        }
+
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        try {
+                            const data = JSON.parse(e.target.result);
+                            
+                            // Validate data structure
+                            if (data.fleetData && data.financialData) {
+                                // Clear existing data
+                                Object.keys(fleetData).forEach(key => delete fleetData[key]);
+                                Object.keys(financialData).forEach(key => delete financialData[key]);
+                                
+                                // Load imported data
+                                Object.assign(fleetData, data.fleetData || {});
+                                Object.assign(financialData, data.financialData || {});
+                                selectedVesselId = data.selectedVesselId || null;
+                                currentFinancialFilter = data.currentFinancialFilter || 'all';
+                                
+                                // Refresh UI
+                                renderFleetOptions();
+                                renderFinancialItems();
+                                filterFinancials(currentFinancialFilter);
+                                selectVessel(selectedVesselId);
+                                
+                                // Auto-save the imported data
+                                saveApplicationState();
+                                
+                                console.log('Data imported successfully');
+                                alert('Data imported successfully!');
+                            } else {
+                                throw new Error('Invalid file format');
+                            }
+                        } catch (error) {
+                            console.error('Failed to import data:', error);
+                            alert('Invalid file format. Please select a valid SeaBorne data file.');
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+            };
+            input.click();
+        }
+
+        // Auto-save function to be called on data changes
+        function autoSave() {
+            saveApplicationState();
+        }
+
+        // Calculate crew size from IN MISSION crew assets
+        function updateCrewSizeFromFinancials() {
+            const crewMembers = Object.values(financialData).filter(item => 
+                item.assetType === 'crew' && item.includedInMission
+            );
+            
+            const totalCrewSize = crewMembers.length;
+            const crewSizeInput = document.getElementById('crew-size');
+            
+            if (crewSizeInput) {
+                crewSizeInput.value = totalCrewSize || 1;
+                // Update placeholder to show it's auto-calculated
+                crewSizeInput.placeholder = totalCrewSize > 0 ? 
+                    `Auto: ${totalCrewSize} crew in mission` : 
+                    'No crew in mission (default: 1)';
+            }
+            
+            return crewMembers;
+        }
+
         // Keyboard shortcuts
         document.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
@@ -1025,6 +2813,41 @@
                 } else if (activePage.id === 'mission-page') {
                     calculateMission();
                 }
+            }
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load saved application state first
+            const dataLoaded = loadApplicationState();
+            
+            // Set default date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('departure-date').value = today;
+            
+            // Initialize priority indicator
+            updatePriorityIndicator();
+            
+            // Initialize fleet selector and refresh UI
+            renderFleetOptions();
+            
+            // Set default crew size to 1 if no vessel selected
+            if (selectedVesselId === null) {
+                document.getElementById('crew-size').value = 1;
+            } else {
+                // Update vessel display if one was loaded
+                selectVessel(selectedVesselId);
+            }
+            
+            // Initialize financial items
+            renderFinancialItems();
+            filterFinancials(currentFinancialFilter);
+            
+            // Initialize asset options
+            renderAssetOptions();
+            
+            if (dataLoaded) {
+                console.log('Welcome back! Your previous session has been restored.');
             }
         });
     </script>
